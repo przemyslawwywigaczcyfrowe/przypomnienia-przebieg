@@ -158,7 +158,7 @@ svg.g { width:100%; height:auto; display:block; }
   </section>
 
   <div class="uklad">
-    <section class="karta graf"><svg class="g" id="g" viewBox="0 0 1240 1790" role="img" aria-label="Graf decyzyjny przypomnień o zapłacie"></svg></section>
+    <section class="karta graf"><svg class="g" id="g" viewBox="0 0 1340 1790" role="img" aria-label="Graf decyzyjny przypomnień o zapłacie"></svg></section>
     <aside class="karta boczny" id="boczny" aria-live="polite"></aside>
   </div>
 
@@ -181,7 +181,7 @@ svg.g { width:100%; height:auto; display:block; }
   var SCEN = [['nic', 'Nie reaguje'], ['po1', 'Płaci po 1. przypomnieniu'], ['tel', 'Odbiera telefon i płaci'], ['nieodb', 'Nie odbiera telefonu'],
     ['czas', 'Prosi o więcej czasu'], ['rez', 'Rezygnuje']];
   var st = { sposob: 'raty', kwota: 'duza', scen: 'nic', gra: false, i: -1, anim: null, t: null };
-  var X = 520, L = 150, R = 900, RR = 1110;
+  var X = 520, L = 150, R = 880, RR = 1130, R3 = 1300;
 
   function N() {
     var S = SPOSOBY[st.sposob];
@@ -203,8 +203,8 @@ svg.g { width:100%; height:auto; display:block; }
       tel: { x: R, y: 650, k: 'tel', t1: 'Telefon z listy', t2: 'następny dzień roboczy, od 7:00', kiedy: 'Telefon', skrypt: 1,
         opis: 'Pracownik widzi w aplikacji, kogo i dlaczego obdzwonić, otwiera kartę klienta w Thulium i dzwoni. Rozmowa zapisuje się w historii klienta.' },
       gC: { x: R, y: 770, k: 'bramka', t1: 'Odebrał?', t2: '', kiedy: 'Bramka', opis: 'Pracownik zapisuje wynik rozmowy jednym kliknięciem.', wyj: [['Tak', 'rozmowa'], ['Nie', 'pracownik wysyła SMS']] },
-      sms: { x: RR, y: 770, k: 'tel', t1: 'SMS od pracownika', t2: 'gotowy tekst z aplikacji', kiedy: 'SMS', smsP: 1, opis: 'Klient nie odebrał. Aplikacja podsuwa gotowy SMS, a przypomnienia automatu idą dalej według planu.' },
-      gW: { x: R, y: 890, k: 'bramka', t1: 'Wynik rozmowy?', t2: '', kiedy: 'Bramka', opis: 'Pracownik wybiera jeden z wyników: zapłaci dziś, inna płatność, zapłacone przed telefonem, rezygnuje.',
+      sms: { x: R, y: 890, k: 'tel', t1: 'SMS od pracownika', t2: 'gotowy tekst z aplikacji', kiedy: 'SMS', smsP: 1, opis: 'Klient nie odebrał. Aplikacja podsuwa gotowy SMS, a przypomnienia automatu idą dalej według planu.' },
+      gW: { x: RR, y: 770, k: 'bramka', t1: 'Wynik rozmowy?', t2: '', kiedy: 'Bramka', opis: 'Pracownik wybiera jeden z wyników: zapłaci dziś, inna płatność, zapłacone przed telefonem, rezygnuje.',
         wyj: [['Zapłaci', 'albo zmieni sposób zapłaty: automat sprawdzi wpłatę przed kolejną wiadomością'], ['Rezygnuje', 'pracownik anuluje zamówienie']] },
       x2: { x: RR, y: 890, k: 'kon', t1: 'Anulowane', t2: 'po rozmowie', kiedy: 'Koniec', opis: 'Klient powiedział w rozmowie, że rezygnuje. Pracownik anuluje zamówienie.' },
       w2: { x: X, y: 1010, k: 'czas', t1: 'Czekamy 2 dni robocze', t2: 'od pierwszego przypomnienia', kiedy: 'Czekanie', opis: 'Tak jak dziś w dziale sprzedaży: drugi kontakt po 2 dniach roboczych.' },
@@ -229,12 +229,12 @@ svg.g { width:100%; height:auto; display:block; }
     ['start', 'w1'], ['w1', 'gA'], ['gA', 'okA', 'Tak'], ['gA', 'm1', 'Nie'], ['m1', 'g1'],
     ['g1', 'okB', 'Zapłać'], ['g1', 'x1', 'Nie chcę'], ['g1', 'gB', 'Nic'],
     ['gB', 'tel', 'Tak'], ['gB', 'w2', 'Nie'], ['tel', 'gC'], ['gC', 'sms', 'Nie'], ['gC', 'gW', 'Tak'],
-    ['sms', 'w2', '', [RR, 1010]], ['gW', 'x2', 'Rezygnuje'], ['gW', 'w2', 'Zapłaci', [R, 1010]],
+    ['sms', 'w2', '', [[R, 1010]]], ['gW', 'x2', 'Rezygnuje'], ['gW', 'w2', 'Zapłaci', [[R3, 770], [R3, 1010]]],
     ['w2', 'gD'], ['gD', 'okD', 'Tak'], ['gD', 'm2', 'Nie'], ['m2', 'g2'],
     ['g2', 'okE', 'Zapłać'], ['g2', 'ext', 'Więcej czasu'], ['g2', 'w3', 'Nic'],
-    ['ext', 'w3', '', [R, 1490]], ['w3', 'gF'], ['gF', 'okF', 'Tak'], ['gF', 'anul', 'Nie']
+    ['ext', 'w3', '', [[R, 1490]]], ['w3', 'gF'], ['gF', 'okF', 'Tak'], ['gF', 'anul', 'Nie']
   ];
-  var ROZ = { krok: [250, 66], czas: [250, 66], wiad: [250, 66], tel: [220, 66], ok: [190, 58], kon: [190, 58], bramka: [230, 104] };
+  var ROZ = { krok: [250, 66], czas: [250, 66], wiad: [250, 66], tel: [220, 66], ok: [190, 58], kon: [190, 58], bramka: [210, 100] };
 
   function droga() {
     var tel = SPOSOBY[st.sposob].tel && st.kwota === 'duza', s = st.scen;
@@ -268,14 +268,16 @@ svg.g { width:100%; height:auto; display:block; }
   function krawedz(e) {
     var a = W[e[0]], b = W[e[1]], m = e[3];
     if (m) {
-      var s = m[0] !== a.x ? brzeg(a, m[0] > a.x ? 1 : -1, 0) : brzeg(a, 0, 1);
-      var k = m[1] === b.y ? brzeg(b, m[0] > b.x ? 1 : -1, 0) : brzeg(b, 0, -1);
-      return [s, [m[0], m[1]], k];
+      /* punkty pośrednie: wyjście w stronę pierwszego, wejście od strony ostatniego */
+      var p1 = m[0], pn = m[m.length - 1];
+      var s = p1[0] !== a.x ? brzeg(a, p1[0] > a.x ? 1 : -1, 0) : brzeg(a, 0, p1[1] > a.y ? 1 : -1);
+      var k = pn[1] === b.y ? brzeg(b, pn[0] > b.x ? 1 : -1, 0) : brzeg(b, 0, pn[1] > b.y ? 1 : -1);
+      return [s].concat(m).concat([k]);
     }
     if (a.x === b.x) return [brzeg(a, 0, b.y > a.y ? 1 : -1), brzeg(b, 0, b.y > a.y ? -1 : 1)];
     if (a.y === b.y) { var d = b.x > a.x ? 1 : -1; return [brzeg(a, d, 0), brzeg(b, -d, 0)]; }
-    var d2 = b.x > a.x ? 1 : -1, s2 = brzeg(a, d2, 0);
-    return [s2, [b.x, a.y], brzeg(b, 0, -1)];
+    var d2 = b.x > a.x ? 1 : -1;
+    return [brzeg(a, d2, 0), [b.x, a.y], brzeg(b, 0, -1)];
   }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function ik(n) { return '<svg class="ic"><use href="#i-' + n + '"/></svg>'; }
