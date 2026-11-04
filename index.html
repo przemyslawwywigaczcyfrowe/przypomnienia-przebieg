@@ -328,7 +328,7 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     ['Rytm przy przelewie', 'Pierwsze przypomnienie po 2 dniach roboczych, drugie po kolejnych 2, jak dziś.', 'ustalone 3.11', 'ok']
   ];
   document.getElementById('dec').innerHTML = DEC.map(function (d) { return '<div class="dc"><span class="co">' + esc(d[0]) + '</span><span class="ja">' + esc(d[1]) + '</span><span class="chip ' + d[3] + '">' + esc(d[2]) + '</span></div>'; }).join('');
-  ster(); rysuj('szybko');
+  ster(); rysuj(false);
 })();
 </script>
 </body>
