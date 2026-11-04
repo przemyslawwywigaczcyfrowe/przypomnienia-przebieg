@@ -122,9 +122,10 @@ h1 { font-size:36px; font-weight:800; letter-spacing:-.02em; line-height:1.12; m
 .sekcja { margin-top:16px; }
 .foot { margin-top:20px; font-size:12.5px; color:var(--muted); }
 
-@media (max-width:1200px) { .uklad { grid-template-columns:1fr; } .boczny { position:static; } .siatka3 { grid-template-columns:1fr 1fr; } }
+@media (max-width:1200px) { .uklad { grid-template-columns:minmax(0,1fr); } .boczny { position:static; } .siatka3 { grid-template-columns:1fr 1fr; } }
 @media (max-width:760px) {
-  .wrap { padding:16px; } h1 { font-size:27px; }
+  .wrap { padding:16px; } h1 { font-size:27px; } .karta, .hero, .ster { padding:18px 16px; border-radius:22px; }
+  .seg { border-radius:18px; } .seg button { height:34px; padding:0 12px; font-size:13.5px; }
   .os { padding-left:0; overflow-x:auto; } .pas .nazwa { position:static; height:auto; padding:6px 0 0; }
   .os-w { min-width:720px; padding-left:0; } .linia { left:0; }
   .siatka3 { grid-template-columns:1fr; } .dec li { grid-template-columns:1fr; gap:4px; } .graj { margin-left:0; }
