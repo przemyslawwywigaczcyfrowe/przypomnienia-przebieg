@@ -202,7 +202,8 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     pyt({ pyt: 'Czy zamówienie jest od 10 000 zł?', opis: st.sposob === 'szybka' ? 'Przy szybkiej płatności nie dzwonimy: klient zwykle płaci sam po pierwszym przypomnieniu.' : 'Dotyczy rat, przelewu i odbioru w salonie. Co piąty klient z progu zostaje bez telefonu, żeby zmierzyć, ile telefon ratuje.',
       opcje: [['Tak', 'dział sprzedaży dzwoni do klienta', 'dalej'], ['Nie', 'czekamy na drugie przypomnienie', 'dalej']], wyb: tel ? 0 : 1 });
     if (tel) {
-      D.push({ typ: 'tel', ik: 'tel', kiedy: 'Następny dzień roboczy, rano', tyt: 'Telefon z działu sprzedaży', opis: 'Pracownik widzi rano listę osób do obdzwonienia i powód przy każdej z nich. Dzwoni z karty klienta w Thulium, więc rozmowa zapisuje się w historii klienta.',
+      D.push({ typ: 'tel', ik: 'tel', kiedy: 'Rano następnego dnia roboczego po zamówieniu', tyt: 'Telefon z działu sprzedaży', opis: 'Pracownik widzi rano listę osób do obdzwonienia i powód przy każdej z nich. Dzwoni z karty klienta w Thulium, więc rozmowa zapisuje się w historii klienta.' +
+          (st.sposob === 'przelew' || st.sposob === 'salon' ? ' Przy ' + (st.sposob === 'przelew' ? 'przelewie' : 'odbiorze w salonie') + ' ten telefon wypada przed pierwszym przypomnieniem, bo ono wychodzi dopiero po 2 dniach roboczych.' : ''),
         cytat: 'Dzień dobry, dzwonię z cyfrowe.pl w sprawie zamówienia 1400123. Widzę, że zapłata jeszcze nie przyszła. Mogę w czymś pomóc?' });
       var odb = s === 'tel' || s === 'rez';
       pyt({ pyt: 'Czy klient odebrał?', opcje: [['Tak', 'rozmowa', 'dalej'], ['Nie', 'pracownik wysyła krótki SMS, a przypomnienia idą dalej', 'dalej']], wyb: odb ? 0 : 1 });
