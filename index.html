@@ -268,7 +268,12 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     E.forEach(function (e) {
       if (!e[2]) return;
       var p = svg.querySelector('path[data-e="' + e[0] + '>' + e[1] + '"]'); if (!p) return;
-      var L2 = p.getTotalLength(), pt = p.getPointAtLength(L2 * (e[3] === 'b' && e[4] === 't' ? .5 : .62)), et = document.createElement('div');
+      var L2 = p.getTotalLength(), pt = p.getPointAtLength(L2 * .5), et = document.createElement('div');
+      if (e[3] === 'l' || e[3] === 'r') {
+        /* boczna gałąź: podpis w połowie odległości między kaflami, nie w połowie łuku */
+        var a0 = p.getPointAtLength(0), a1 = p.getPointAtLength(L2), sx = (a0.x + a1.x) / 2, naj = 1e9;
+        for (var t = 0; t <= L2; t += 2) { var q = p.getPointAtLength(t); if (Math.abs(q.x - sx) < naj) { naj = Math.abs(q.x - sx); pt = q; } }
+      }
       et.className = 'et' + (naDrodze[e[0] + '>' + e[1]] ? ' na' : '') + (e[5] ? ' czas' : '');
       et.style.left = pt.x + 'px'; et.style.top = pt.y + 'px'; et.textContent = e[2];
       mapa.appendChild(et);
