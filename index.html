@@ -45,18 +45,13 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
 .seg button:hover { border-color:var(--acc); color:var(--acc-dark); }
 .seg button.on { background:var(--ink); border-color:var(--ink); color:#fff; }
 .seg button[disabled] { opacity:.35; cursor:not-allowed; }
-.graj { margin-left:auto; }
-.btn { height:46px; padding:0 22px; border-radius:999px; border:0; background:var(--acc); color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(11,87,208,.3); }
-.btn:hover { background:var(--acc-dark); }
 
 /* droga */
 .tytulDrogi { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
 .podDrogi { color:var(--muted); margin-bottom:26px; }
 .droga { position:relative; padding-left:72px; }
 .droga::before { content:""; position:absolute; left:27px; top:28px; bottom:28px; width:2px; background:var(--rule); }
-.postep { position:absolute; left:27px; top:28px; width:2px; height:0; background:linear-gradient(var(--acc), #6D9EEB); transition:height .6s ease; }
-.el { position:relative; margin-bottom:18px; opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
-.el.pokaz { opacity:1; transform:none; }
+.el { position:relative; margin-bottom:18px; }
 .kolo { position:absolute; left:-72px; top:14px; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:#fff; color:var(--muted);
   box-shadow:0 0 0 6px var(--paper), var(--cien); }
 .el.krok .kolo { color:var(--ink2); }
@@ -121,11 +116,10 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
 @media (max-width:900px) { .liczby { grid-template-columns:1fr 1fr; } .dec { grid-template-columns:1fr; } .wiadomosci { grid-template-columns:1fr; } }
 @media (max-width:600px) {
   .wrap { padding:22px 16px 40px; } h1 { font-size:30px; } .zd { font-size:16px; } .liczba .v { font-size:26px; }
-  .droga { padding-left:52px; } .droga::before, .postep { left:19px; } .kolo { left:-52px; width:40px; height:40px; } .kolo .ic { width:18px; height:18px; }
+  .droga { padding-left:52px; } .droga::before { left:19px; } .kolo { left:-52px; width:40px; height:40px; } .kolo .ic { width:18px; height:18px; }
   .karta { padding:16px 16px; } .tyt { font-size:18px; } .opcja { flex-wrap:wrap; } .opcja .odp { min-width:0; } .opcja .str { margin-left:0; }
-  .graj { margin-left:0; }
 }
-@media (prefers-reduced-motion:reduce) { * { transition:none !important; } .el { opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
 </style>
 </head>
 <body>
@@ -139,7 +133,6 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
   <symbol id="i-ok" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></symbol>
   <symbol id="i-kal" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z"/></symbol>
-  <symbol id="i-graj" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
 </svg>
 
 <div class="wrap">
@@ -158,7 +151,6 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     <div class="grupa"><span class="t">Jak klient chciał zapłacić?</span><div class="seg" id="sSposob"></div></div>
     <div class="grupa"><span class="t">Ile kosztuje zamówienie?</span><div class="seg" id="sKwota"></div></div>
     <div class="grupa"><span class="t">Co robi klient?</span><div class="seg" id="sScen"></div></div>
-    <div class="graj"><button class="btn" id="graj"><svg class="ic"><use href="#i-graj"/></svg>Pokaż od początku</button></div>
   </div>
 
   <div class="tytulDrogi" id="tytulDrogi"></div>
@@ -182,7 +174,7 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     salon: { n: 'Odbiór w salonie', termin: 7, tel: true, start: 'Towar czeka w salonie, a klient ma zapłacić przy odbiorze.', w1: '2 dni robocze', w1potw: true }
   };
   var SCEN = [['nic', 'Nie reaguje'], ['po1', 'Płaci po przypomnieniu'], ['tel', 'Płaci po telefonie'], ['nieodb', 'Nie odbiera'], ['czas', 'Prosi o czas'], ['rez', 'Rezygnuje']];
-  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic', t: [] };
+  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic' };
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function ik(n) { return '<svg class="ic"><use href="#i-' + n + '"/></svg>'; }
@@ -269,29 +261,14 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     return h + '</div></div>';
   }
 
-  function rysuj(animuj) {
-    st.t.forEach(clearTimeout); st.t = [];
+  function rysuj() {
     var D = droga(), S = SPOSOBY[st.sposob], sc = SCEN.filter(function (x) { return x[0] === st.scen; })[0][1];
     document.getElementById('tytulDrogi').textContent = S.n + ', ' + (st.kwota === 'duza' ? 'od 10 000 zł' : 'do 10 000 zł') + ': ' + sc.toLowerCase();
     var kon = D[D.length - 1];
     var ileW = D.filter(function (e) { return e.typ === 'wiad' || e.w; }).length;
     document.getElementById('podDrogi').textContent = ileW + (ileW === 1 ? ' wiadomość' : ' wiadomości') + ' od automatu, ' +
       (D.some(function (e) { return e.ik === 'tel'; }) ? 'telefon z działu sprzedaży, ' : 'bez telefonu, ') + 'na końcu: ' + kon.tyt.toLowerCase() + '.';
-    var box = document.getElementById('droga');
-    box.innerHTML = '<div class="postep" id="postep"></div>' + D.map(element).join('');
-    var el = box.querySelectorAll('.el'), post = document.getElementById('postep');
-    function pokaz(k) {
-      el[k].classList.add('pokaz');
-      var r = el[k].getBoundingClientRect(), b = box.getBoundingClientRect();
-      post.style.height = Math.max(0, r.top - b.top + 14) + 'px';
-    }
-    if (!animuj) { for (var k = 0; k < el.length; k++) pokaz(k); return; }
-    el.forEach(function (_, k) {
-      st.t.push(setTimeout(function () {
-        pokaz(k);
-        if (animuj === 'przewin' && el[k].scrollIntoView) el[k].scrollIntoView({ block: 'center', behavior: 'smooth' });
-      }, 120 + k * (animuj === 'przewin' ? 750 : 110)));
-    });
+    document.getElementById('droga').innerHTML = D.map(element).join('');
   }
 
   function seg(id, opcje, k) {
@@ -310,9 +287,8 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     if (b.dataset.k) {
       st[b.dataset.k] = b.dataset.v;
       if ((st.scen === 'tel' || st.scen === 'nieodb') && !(SPOSOBY[st.sposob].tel && st.kwota === 'duza')) st.scen = 'nic';
-      ster(); rysuj('szybko'); return;
+      ster(); rysuj(); return;
     }
-    if (b.id === 'graj') { document.getElementById('tytulDrogi').scrollIntoView({ behavior: 'smooth' }); rysuj('przewin'); return; }
     if (b.dataset.w != null) { var w = document.getElementById('w' + b.dataset.w); w.classList.toggle('otw'); b.textContent = w.classList.contains('otw') ? 'Schowaj wiadomość' : 'Zobacz, co dostaje klient'; }
   });
 
@@ -328,7 +304,7 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
     ['Rytm przy przelewie', 'Pierwsze przypomnienie po 2 dniach roboczych, drugie po kolejnych 2, jak dziś.', 'ustalone 3.11', 'ok']
   ];
   document.getElementById('dec').innerHTML = DEC.map(function (d) { return '<div class="dc"><span class="co">' + esc(d[0]) + '</span><span class="ja">' + esc(d[1]) + '</span><span class="chip ' + d[3] + '">' + esc(d[2]) + '</span></div>'; }).join('');
-  ster(); rysuj(false);
+  ster(); rysuj();
 })();
 </script>
 </body>
