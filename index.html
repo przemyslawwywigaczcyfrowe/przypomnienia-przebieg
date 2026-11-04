@@ -16,120 +16,104 @@
   --good:#146C2E; --good-soft:#E3F4E8; --bad:#B3261E; --bad-soft:#FCEAE8;
   --tel:#6D3FE0; --tel-soft:#EFEAFE; --gate:#A15C07; --gate-soft:#FFF5E3; --warn:#9A3412; --warn-soft:#FEEFE3;
   --fg:"Google Sans Flex","Google Sans",Roboto,Arial,sans-serif; --f:Figtree,system-ui,"Segoe UI",sans-serif;
-  --cien:0 1px 2px rgba(16,24,40,.04),0 6px 20px rgba(16,24,40,.06);
+  --cien:0 1px 2px rgba(16,24,40,.05),0 8px 24px rgba(16,24,40,.07);
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { background:var(--paper); }
-body { font-family:var(--f); color:var(--ink); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+body { font-family:var(--f); color:var(--ink); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; }
 button { font:inherit; color:inherit; cursor:pointer; }
-.ic { width:22px; height:22px; fill:currentColor; flex:none; }
-.wrap { max-width:1180px; margin:0 auto; padding:40px 32px 64px; }
-
-/* nagłówek */
-.kicker { font:600 14px var(--fg); color:var(--acc-dark); letter-spacing:.02em; }
-h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; margin:10px 0 14px; max-width:860px; }
-.zd { color:var(--ink2); font-size:18px; max-width:760px; }
-.liczby { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:30px 0 34px; }
-.liczba { background:#fff; border-radius:24px; padding:20px 22px; box-shadow:var(--cien); }
-.liczba .v { font-size:34px; font-weight:800; letter-spacing:-.02em; line-height:1.1; color:var(--acc-dark); }
-.liczba .t { font-weight:700; margin-top:6px; }
-.liczba .s { font-size:14px; color:var(--muted); margin-top:2px; }
-
-/* sterowanie */
-.ster { background:#fff; border-radius:24px; padding:16px 20px;
-  box-shadow:var(--cien); display:flex; flex-wrap:wrap; gap:14px 24px; align-items:flex-end; margin-bottom:34px; }
+.ic { width:20px; height:20px; fill:currentColor; flex:none; }
+.wrap { max-width:1500px; margin:0 auto; padding:40px 32px 64px; }
+.kicker { font:600 14px var(--fg); color:var(--acc-dark); }
+h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; margin:10px 0 14px; max-width:900px; }
+.zd { color:var(--ink2); font-size:18px; max-width:820px; }
+.liczby { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:28px 0 22px; }
+.liczba { background:#fff; border-radius:24px; padding:18px 22px; box-shadow:var(--cien); }
+.liczba .v { font-size:32px; font-weight:800; letter-spacing:-.02em; line-height:1.1; color:var(--acc-dark); }
+.liczba .t { font-weight:700; margin-top:4px; }
+.liczba .s { font-size:14px; color:var(--muted); }
+.ster { background:#fff; border-radius:24px; padding:16px 20px; box-shadow:var(--cien); display:flex; flex-wrap:wrap; gap:14px 26px; margin-bottom:18px; }
 .grupa { display:flex; flex-direction:column; gap:6px; }
 .grupa .t { font-size:13px; font-weight:700; color:var(--muted); }
 .seg { display:inline-flex; flex-wrap:wrap; gap:6px; }
-.seg button { border:1px solid var(--edge); background:#fff; font:600 14px var(--f); color:var(--ink2); height:38px; padding:0 16px; border-radius:999px; white-space:nowrap; transition:all .2s; }
+.seg button { border:1px solid var(--edge); background:#fff; font:600 14px var(--f); color:var(--ink2); height:38px; padding:0 16px; border-radius:999px; white-space:nowrap; }
 .seg button:hover { border-color:var(--acc); color:var(--acc-dark); }
 .seg button.on { background:var(--ink); border-color:var(--ink); color:#fff; }
 .seg button[disabled] { opacity:.35; cursor:not-allowed; }
 
-/* droga */
-.tytulDrogi { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
-.podDrogi { color:var(--muted); margin-bottom:26px; }
-.droga { position:relative; padding-left:72px; }
-.droga::before { content:""; position:absolute; left:27px; top:28px; bottom:28px; width:2px; background:var(--rule); }
-.el { position:relative; margin-bottom:18px; }
-.kolo { position:absolute; left:-72px; top:14px; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:#fff; color:var(--muted);
-  box-shadow:0 0 0 6px var(--paper), var(--cien); }
-.el.krok .kolo { color:var(--ink2); }
-.el.wiad .kolo { background:var(--acc); color:#fff; }
-.el.tel .kolo { background:var(--tel); color:#fff; }
-.el.czas .kolo { background:#fff; color:var(--muted); }
-.el.pyt .kolo { background:var(--gate-soft); color:var(--gate); }
-.el.ok .kolo { background:var(--good); color:#fff; }
-.el.kon .kolo { background:var(--bad); color:#fff; }
-.karta { background:#fff; border-radius:24px; padding:20px 24px; box-shadow:var(--cien); }
-.el.czas .karta { background:transparent; box-shadow:none; padding:16px 4px; }
-.el.czas .tyt { color:var(--muted); font-weight:700; font-size:16px; }
+.uklad { display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:18px; align-items:start; }
+.plotno { background:#fff; border-radius:28px; box-shadow:var(--cien); padding:24px 16px 28px; overflow-x:auto; }
+.mapa { position:relative; min-width:900px; height:1620px; }
+.mapa svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.mapa path.li { fill:none; stroke:#D9DFE7; stroke-width:2.5; stroke-dasharray:2 7; stroke-linecap:round; transition:stroke .3s; }
+.mapa path.li.na { stroke:var(--acc); stroke-width:4.5; stroke-dasharray:none; }
+.mapa path.li.na.do-ok { stroke:var(--good); } .mapa path.li.na.do-kon { stroke:var(--bad); }
+.et { position:absolute; transform:translate(-50%,-50%); background:#fff; border:1px solid var(--rule); border-radius:999px; padding:2px 10px;
+  font:700 12.5px var(--fg); color:var(--muted); white-space:nowrap; z-index:2; }
+.et.na { border-color:var(--acc-soft); color:var(--acc-dark); }
+.et.czas { background:var(--hair); border-style:dashed; }
+
+.w { position:absolute; transform:translate(-50%,-50%); width:236px; border-radius:20px; padding:12px 16px; background:#fff;
+  border:1.5px solid var(--edge); text-align:left; z-index:3; transition:opacity .3s, box-shadow .3s, transform .3s; display:flex; gap:12px; align-items:center; }
+.w .k { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; flex:none; background:var(--hair); color:var(--ink2); }
+.w .k .ic { width:19px; height:19px; }
+.w .t1 { font-weight:800; font-size:15px; line-height:1.25; }
+.w .t2 { font-size:13px; color:var(--muted); line-height:1.3; margin-top:2px; }
+.w.wiad { background:var(--acc-tint); border-color:var(--acc-soft); } .w.wiad .k { background:var(--acc); color:#fff; }
+.w.tel { background:var(--tel-soft); border-color:#D8CCFB; } .w.tel .k { background:var(--tel); color:#fff; }
+.w.pyt { background:var(--gate-soft); border-color:#F3D9A8; border-radius:999px; padding:12px 22px 12px 12px; }
+.w.pyt .k { background:var(--gate); color:#fff; font:800 20px var(--fg); }
+.w.ok { background:var(--good-soft); border-color:#BFE3C9; width:196px; border-radius:999px; } .w.ok .k { background:var(--good); color:#fff; }
+.w.kon { background:var(--bad-soft); border-color:#F2C2BD; width:196px; border-radius:999px; } .w.kon .k { background:var(--bad); color:#fff; }
+.w.poza { opacity:.38; }
+.w.na { box-shadow:0 10px 26px rgba(16,24,40,.13); }
+.w:hover { transform:translate(-50%,-50%) scale(1.03); opacity:1; }
+.w.wyb { outline:3px solid var(--acc); outline-offset:3px; }
+.potw { position:absolute; top:-9px; right:-9px; width:24px; height:24px; border-radius:50%; background:var(--warn); color:#fff; font:800 13px var(--fg); display:grid; place-items:center; }
+
+.boczny { position:sticky; top:16px; background:#fff; border-radius:28px; box-shadow:var(--cien); padding:22px 24px; }
 .kiedy { font:700 12.5px var(--fg); text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
-.el.wiad .kiedy { color:var(--acc-dark); } .el.tel .kiedy { color:var(--tel); } .el.pyt .kiedy { color:var(--gate); }
-.tyt { font-size:21px; font-weight:800; line-height:1.25; margin:3px 0 4px; letter-spacing:-.01em; }
+.tyt { font-size:22px; font-weight:800; line-height:1.25; margin:4px 0 6px; }
 .opis { color:var(--ink2); }
-.potw { display:inline-flex; margin-top:10px; font-size:13px; font-weight:600; color:var(--warn); background:var(--warn-soft); border-radius:999px; padding:4px 12px; }
-
-/* pytanie */
-.el.pyt .karta { background:linear-gradient(180deg,#FFFBF3,#fff); border:1px solid #F6E3BF; }
-.opcje { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
-.opcja { display:flex; gap:12px; align-items:center; border-radius:16px; padding:10px 14px; background:var(--hair); color:var(--muted); transition:all .4s; }
-.opcja .odp { font-weight:800; min-width:120px; font-size:15px; }
-.opcja .sk { font-size:14.5px; }
-.opcja.wyb { background:var(--ink); color:#fff; transform:scale(1.01); box-shadow:0 6px 16px rgba(17,19,24,.18); }
-.opcja.wyb.t-ok { background:var(--good); } .opcja.wyb.t-kon { background:var(--bad); } .opcja.wyb.t-dalej { background:var(--acc); }
-.opcja .str { margin-left:auto; font-size:12.5px; font-weight:700; opacity:.85; white-space:nowrap; }
-
-/* wiadomość */
-.pokazWiad { margin-top:12px; border:0; background:var(--acc-tint); color:var(--acc-dark); font-weight:700; font-size:14px; padding:7px 14px; border-radius:999px; }
-.wiadomosci { display:none; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
-.wiadomosci.otw { display:grid; }
-.tel-ekran { border-radius:20px; background:#F7F9FC; border:1px solid var(--rule); padding:14px 16px; font-size:14px; }
-.tel-ekran .g { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; color:var(--muted); margin-bottom:8px; }
+.wyjscia { list-style:none; margin-top:12px; }
+.wyjscia li { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid var(--hair); font-size:14.5px; }
+.wyjscia li:last-child { border-bottom:0; }
+.wyjscia b { min-width:110px; }
+.tel-ekran { margin-top:12px; border-radius:18px; background:#F7F9FC; border:1px solid var(--rule); padding:12px 14px; font-size:14px; }
+.tel-ekran .g { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; color:var(--muted); margin-bottom:6px; }
 .tel-ekran .g .ic { width:16px; height:16px; }
-.tel-ekran b { display:block; font-size:15px; margin-bottom:4px; }
-.tel-ekran.sms .t { background:#fff; border-radius:16px 16px 16px 4px; padding:10px 12px; box-shadow:0 1px 2px rgba(0,0,0,.06); }
-.przyc { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-.przyc span { font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:999px; background:var(--acc); color:#fff; }
+.tel-ekran b { display:block; font-size:15px; margin-bottom:3px; }
+.tel-ekran.sms .t { background:#fff; border-radius:14px 14px 14px 4px; padding:9px 11px; box-shadow:0 1px 2px rgba(0,0,0,.06); font-size:13.5px; }
+.przyc { display:flex; gap:6px; flex-wrap:wrap; margin-top:9px; }
+.przyc span { font-size:12.5px; font-weight:700; padding:4px 11px; border-radius:999px; background:var(--acc); color:#fff; }
 .przyc span.j { background:#fff; color:var(--acc-dark); border:1px solid var(--edge); }
-.cytat { margin-top:12px; font-size:15px; color:var(--ink2); background:var(--tel-soft); border-radius:16px; padding:12px 14px; }
-.uwaga { margin-top:10px; font-size:13.5px; color:var(--warn); }
+.cytat { margin-top:12px; font-size:14.5px; color:var(--ink2); background:var(--tel-soft); border-radius:14px; padding:10px 12px; }
+.uwaga { margin-top:12px; font-size:13.5px; color:var(--warn); background:var(--warn-soft); border-radius:12px; padding:8px 12px; }
+.streszcz { margin-top:14px; padding-top:14px; border-top:1px solid var(--hair); font-size:14.5px; color:var(--ink2); }
+.streszcz b { color:var(--ink); }
+.wskaz { font-size:13.5px; color:var(--muted); margin-top:10px; }
 
-/* koniec */
-.el.ok .karta { background:var(--good-soft); box-shadow:none; }
-.el.kon .karta { background:var(--bad-soft); box-shadow:none; }
-.el.ok .tyt { color:var(--good); } .el.kon .tyt { color:var(--bad); }
-
-/* zatwierdzenie */
-.sekcja { margin-top:46px; }
+.sekcja { margin-top:40px; }
 .sekcja h2 { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
 .sekcja .pod { color:var(--muted); margin-bottom:18px; }
 .dec { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
 .dc { background:#fff; border-radius:22px; padding:18px 20px; box-shadow:var(--cien); display:flex; flex-direction:column; gap:6px; }
-.dc .co { font-weight:800; }
-.dc .ja { font-size:14.5px; color:var(--ink2); flex:1; }
+.dc .co { font-weight:800; } .dc .ja { font-size:14.5px; color:var(--ink2); flex:1; }
 .chip { align-self:flex-start; display:inline-flex; align-items:center; height:28px; padding:0 12px; border-radius:999px; font-size:13px; font-weight:700; }
 .chip.ok { background:var(--good-soft); color:var(--good); } .chip.warn { background:var(--warn-soft); color:var(--warn); }
 .chip.bad { background:var(--bad-soft); color:var(--bad); } .chip.nb { background:var(--acc-tint); color:var(--acc-dark); }
 .foot { margin-top:30px; font-size:13px; color:var(--muted); }
-
-@media (max-width:900px) { .liczby { grid-template-columns:1fr 1fr; } .dec { grid-template-columns:1fr; } .wiadomosci { grid-template-columns:1fr; } }
-@media (max-width:600px) {
-  .wrap { padding:22px 16px 40px; } h1 { font-size:30px; } .zd { font-size:16px; } .liczba .v { font-size:26px; }
-  .droga { padding-left:52px; } .droga::before { left:19px; } .kolo { left:-52px; width:40px; height:40px; } .kolo .ic { width:18px; height:18px; }
-  .karta { padding:16px 16px; } .tyt { font-size:18px; } .opcja { flex-wrap:wrap; } .opcja .odp { min-width:0; } .opcja .str { margin-left:0; }
-}
-@media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+@media (max-width:1280px) { .uklad { grid-template-columns:minmax(0,1fr); } .boczny { position:static; } }
+@media (max-width:900px) { .liczby { grid-template-columns:1fr 1fr; } .dec { grid-template-columns:1fr; } }
+@media (max-width:600px) { .wrap { padding:22px 16px 40px; } h1 { font-size:30px; } .zd { font-size:16px; } .liczba .v { font-size:24px; } }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute">
   <symbol id="i-koszyk" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 4H2V2h4.6l.9 2H21l-3.2 8H8.4l-.9 2H19v2H4.3l2.6-5L5.2 4z"/></symbol>
-  <symbol id="i-zegar" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h-5v-2h3V6h2v7z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></symbol>
   <symbol id="i-sms" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM8 11H6V9h2v2zm5 0h-2V9h2v2zm5 0h-2V9h2v2z"/></symbol>
   <symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></symbol>
-  <symbol id="i-pyt" viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a4 4 0 0 0-4 4h2a2 2 0 1 1 4 0c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5a4 4 0 0 0-4-4z"/></symbol>
   <symbol id="i-ok" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></symbol>
   <symbol id="i-kal" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z"/></symbol>
@@ -138,28 +122,25 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
 <div class="wrap">
   <div class="kicker">Przypomnienia o zapłacie · do zatwierdzenia</div>
   <h1>Klient zamówił i nie zapłacił. Co dalej?</h1>
-  <div class="zd">Tak będzie wyglądać droga klienta po wprowadzeniu automatu. Wybierz sposób zapłaty i to, jak zachowa się klient. Przy każdym pytaniu widać też, co by się stało przy innej odpowiedzi.</div>
-
+  <div class="zd">Mapa pokazuje wszystkie drogi, którymi może pójść klient. Pomarańczowe kafle ze znakiem zapytania to miejsca, w których coś się rozstrzyga. Wybierz przykład, a jego droga zaświeci się na mapie. Kliknij dowolny kafel, żeby zobaczyć szczegóły i wiadomość, którą dostaje klient.</div>
   <div class="liczby">
     <div class="liczba"><div class="v">2</div><div class="t">przypomnienia</div><div class="s">i wiadomość o anulowaniu, zawsze mail i SMS razem</div></div>
     <div class="liczba"><div class="v">0</div><div class="t">wiadomości po wpłacie</div><div class="s">automat sprawdza zamówienie przed każdą wysyłką</div></div>
     <div class="liczba"><div class="v">10 000 zł</div><div class="t">od tej kwoty dzwonimy</div><div class="s">przy ratach, przelewie i odbiorze w salonie</div></div>
     <div class="liczba"><div class="v">5 albo 7</div><div class="t">dni na zapłatę</div><div class="s">5 przy szybkiej płatności, 7 przy pozostałych</div></div>
   </div>
-
   <div class="ster">
     <div class="grupa"><span class="t">Jak klient chciał zapłacić?</span><div class="seg" id="sSposob"></div></div>
     <div class="grupa"><span class="t">Ile kosztuje zamówienie?</span><div class="seg" id="sKwota"></div></div>
     <div class="grupa"><span class="t">Co robi klient?</span><div class="seg" id="sScen"></div></div>
   </div>
-
-  <div class="tytulDrogi" id="tytulDrogi"></div>
-  <div class="podDrogi" id="podDrogi"></div>
-  <div class="droga" id="droga"></div>
-
+  <div class="uklad">
+    <div class="plotno"><div class="mapa" id="mapa"><svg id="linie"></svg></div></div>
+    <aside class="boczny" id="boczny" aria-live="polite"></aside>
+  </div>
   <section class="sekcja">
     <h2>Co trzeba zatwierdzić?</h2>
-    <div class="pod">Większość ustaliliśmy w Asanie. Dwie rzeczy to moje propozycje, o których decyduje dział sprzedaży.</div>
+    <div class="pod">Większość ustaliliśmy w Asanie. Dwie rzeczy to moje propozycje, o których decyduje dział sprzedaży. Na mapie mają pomarańczowy znak „?”.</div>
     <div class="dec" id="dec"></div>
   </section>
   <div class="foot">cyfrowe.pl · projekt „Przypomnienia o zapłacie”. Treści wiadomości są przykładowe, ostateczne przygotowuje marketing. Numer zamówienia 1400123 jest wymyślony.</div>
@@ -168,60 +149,129 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
 <script>
 (function () {
   var SPOSOBY = {
-    szybka: { n: 'Szybka płatność', termin: 5, tel: false, start: 'Płatność BLIK-iem albo kartą nie przeszła.', w1: '20 minut', w1potw: true },
-    raty: { n: 'Raty', termin: 7, tel: true, start: 'Klient wybrał raty, ale nie dokończył wniosku w banku.', w1: '30 minut', w1potw: true },
-    przelew: { n: 'Przelew', termin: 7, tel: true, start: 'Klient ma zapłacić przelewem, ale pieniądze jeszcze nie wpłynęły.', w1: '2 dni robocze', w1potw: false },
-    salon: { n: 'Odbiór w salonie', termin: 7, tel: true, start: 'Towar czeka w salonie, a klient ma zapłacić przy odbiorze.', w1: '2 dni robocze', w1potw: true }
+    szybka: { n: 'Szybka płatność', termin: 5, tel: false, start: 'BLIK albo karta nie przeszły', w1: 'po 20 minutach', potw: true },
+    raty: { n: 'Raty', termin: 7, tel: true, start: 'wniosek o raty niedokończony', w1: 'po 30 minutach', potw: true },
+    przelew: { n: 'Przelew', termin: 7, tel: true, start: 'przelew jeszcze nie wpłynął', w1: 'po 2 dniach roboczych', potw: false },
+    salon: { n: 'Odbiór w salonie', termin: 7, tel: true, start: 'towar czeka w salonie', w1: 'po 2 dniach roboczych', potw: true }
   };
   var SCEN = [['nic', 'Nie reaguje'], ['po1', 'Płaci po przypomnieniu'], ['tel', 'Płaci po telefonie'], ['nieodb', 'Nie odbiera'], ['czas', 'Prosi o czas'], ['rez', 'Rezygnuje']];
-  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic' };
+  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic', wyb: null };
+  var L = 12, C = 42, R = 70, R2 = 90;
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function ik(n) { return '<svg class="ic"><use href="#i-' + n + '"/></svg>'; }
 
-  /* ------------------------------------------------------------ droga */
+  function wezly() {
+    var S = SPOSOBY[st.sposob], T = S.termin;
+    return {
+      start: { x: C, y: 50, typ: 'krok', ik: 'koszyk', t1: 'Klient zamówił', t2: S.start, kiedy: 'Start', opis: 'Klient złożył zamówienie, ale ' + S.start + '. Towar jest dla niego zarezerwowany.' },
+      q1: { x: C, y: 200, typ: 'pyt', t1: 'Zapłacił sam?', kiedy: 'Pytanie', opis: 'Automat sprawdza w sklepie, czy wpłata już jest, tuż przed wysłaniem wiadomości.', wyj: [['Tak', 'koniec, klient nie dostaje żadnej wiadomości'], ['Nie', 'wysyłamy pierwsze przypomnienie']],
+        potw: S.potw, potwT: st.sposob === 'salon' ? 'Propozycja: rytm jak przy przelewie, od chwili, gdy towar czeka w salonie. Decyduje dział sprzedaży.' : 'Propozycja: sprawdzenie ' + S.w1 + '. Dziś dział przypomina „od razu, gdy dotrze do zamówienia”. Decyduje dział sprzedaży.' },
+      okA: { x: L, y: 200, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'bez wiadomości', kiedy: 'Koniec', opis: 'Klient zapłacił sam. Automat niczego nie wysyła.' },
+      m1: { x: C, y: 330, typ: 'wiad', ik: 'mail', t1: '1. przypomnienie', t2: 'mail i SMS razem', kiedy: 'Wiadomość', w: 1, opis: 'Klient dostaje mail i SMS w tej samej chwili, z przyciskami „Zapłać” i „Nie chcę, anuluj”.' },
+      q2: { x: C, y: 470, typ: 'pyt', t1: 'Jak zareagował?', kiedy: 'Pytanie', opis: 'Klient może zapłacić, zrezygnować albo nic nie zrobić.', wyj: [['Zapłacił', 'koniec wiadomości'], ['Zrezygnował', 'anulowanie od razu, towar wraca do sprzedaży'], ['Nic', 'idziemy dalej']] },
+      okB: { x: L, y: 470, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'po 1. przypomnieniu', kiedy: 'Koniec', opis: 'Klient zapłacił po pierwszym przypomnieniu. Automat nie wysyła już nic.' },
+      xB: { x: R, y: 400, typ: 'kon', ik: 'x', t1: 'Anulowane', t2: 'na prośbę klienta', kiedy: 'Koniec', opis: 'Klient kliknął „Nie chcę, anuluj”. Dostaje krótkie potwierdzenie i żadnych przypomnień więcej.' },
+      q3: { x: C, y: 620, typ: 'pyt', t1: 'Od 10 000 zł?', kiedy: 'Pytanie', opis: 'Dzwonimy przy ratach, przelewie i odbiorze w salonie od 10 000 zł. Przy szybkiej płatności nie dzwonimy. Co piąty klient z progu zostaje bez telefonu, żeby zmierzyć, ile telefon ratuje.',
+        wyj: [['Tak', 'dzwoni dział sprzedaży'], ['Nie', 'czekamy na drugie przypomnienie']] },
+      tel: { x: R, y: 620, typ: 'tel', ik: 'tel', t1: 'Telefon', t2: 'dział sprzedaży, rano', kiedy: 'Telefon', cytat: 1,
+        opis: 'Rano następnego dnia roboczego po zamówieniu pracownik widzi listę osób do obdzwonienia i powód przy każdej. Dzwoni z karty klienta w Thulium, więc rozmowa zapisuje się w historii klienta.' + (st.sposob === 'przelew' || st.sposob === 'salon' ? ' Przy tej formie zapłaty telefon wypada przed pierwszym przypomnieniem.' : '') },
+      q4: { x: R, y: 770, typ: 'pyt', t1: 'Jak poszła rozmowa?', kiedy: 'Pytanie', opis: 'Pracownik zapisuje wynik jednym kliknięciem.', wyj: [['Zapłaci', 'albo wybierze inny sposób zapłaty'], ['Rezygnuje', 'pracownik anuluje zamówienie'], ['Nie odebrał', 'pracownik wysyła krótki SMS']] },
+      okT: { x: R2, y: 680, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'po rozmowie', kiedy: 'Koniec', opis: 'Gdy wpłata przyjdzie, automat nie wysyła już drugiego przypomnienia.' },
+      xT: { x: R2, y: 860, typ: 'kon', ik: 'x', t1: 'Anulowane', t2: 'po rozmowie', kiedy: 'Koniec', opis: 'Klient powiedział, że rezygnuje. Pracownik anuluje zamówienie i towar wraca do sprzedaży.' },
+      sms: { x: R, y: 920, typ: 'tel', ik: 'sms', t1: 'SMS od pracownika', t2: 'gotowy tekst z aplikacji', kiedy: 'SMS', smsP: 1, opis: 'Aplikacja podsuwa gotowy tekst. Przypomnienia automatu idą dalej według planu.' },
+      q5: { x: C, y: 1060, typ: 'pyt', t1: 'Zapłacił?', kiedy: 'Pytanie', opis: 'Znów sprawdzenie tuż przed wysyłką.', wyj: [['Tak', 'koniec wiadomości'], ['Nie', 'drugie przypomnienie']] },
+      okD: { x: L, y: 1060, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'przed 2. przypomnieniem', kiedy: 'Koniec', opis: 'Klient zapłacił przed drugim przypomnieniem.' },
+      m2: { x: C, y: 1190, typ: 'wiad', ik: 'mail', t1: '2. przypomnienie', t2: 'z datą anulowania', kiedy: 'Wiadomość', w: 2, opis: 'Mail i SMS z dniem, po którym zamówienie zostanie anulowane. Klient może poprosić o więcej czasu.' },
+      q6: { x: C, y: 1330, typ: 'pyt', t1: 'Jak zareagował?', kiedy: 'Pytanie', opis: 'Klient może zapłacić, poprosić o więcej czasu albo nic nie zrobić. Przycisk „Nie chcę, anuluj” działa tak jak w pierwszym przypomnieniu.',
+        wyj: [['Zapłacił', 'koniec'], ['Poprosił o czas', 'termin +7 dni, jeden raz'], ['Nic', 'czekamy do terminu']] },
+      okE: { x: L, y: 1330, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'po 2. przypomnieniu', kiedy: 'Koniec', opis: 'Klient zapłacił po drugim przypomnieniu.' },
+      ext: { x: R, y: 1330, typ: 'krok', ik: 'kal', t1: 'Termin +7 dni', t2: 'jeden raz, bez wyjątków', kiedy: 'Przedłużenie', opis: 'Termin przesuwa się o 7 dni. Drugi raz przycisk się nie pokaże.' },
+      q7: { x: C, y: 1470, typ: 'pyt', t1: 'Zapłacił w terminie?', kiedy: 'Pytanie', opis: 'Ostatnie sprawdzenie w dniu terminu o 9:00.', wyj: [['Tak', 'zamówienie idzie do realizacji'], ['Nie', 'anulowanie']] },
+      okF: { x: L, y: 1470, typ: 'ok', ik: 'ok', t1: 'Zapłacone', t2: 'w terminie', kiedy: 'Koniec', opis: 'Klient zapłacił przed terminem.' },
+      anul: { x: C, y: 1580, typ: 'kon', ik: 'x', t1: 'Anulowane', t2: 'dzień ' + T + ', spokojna wiadomość', kiedy: 'Koniec', w: 3,
+        opis: 'Termin minął. Sklep zwalnia towar. Klient dostaje mail i SMS bez wyrzutu, z przyciskiem do odtworzenia zamówienia.', uwaga: 'Dziś mail o anulowaniu nie dochodzi do klienta. IT musi to naprawić przed startem.' }
+    };
+  }
+  /* [od, do, napis, wyjście, wejście, czy napis to czas] */
+  function krawedzie() {
+    var S = SPOSOBY[st.sposob];
+    return [
+      ['start', 'q1', S.w1, 'b', 't', 1], ['q1', 'okA', 'Tak', 'l', 'r'], ['q1', 'm1', 'Nie', 'b', 't'], ['m1', 'q2', '', 'b', 't'],
+      ['q2', 'okB', 'Zapłacił', 'l', 'r'], ['q2', 'xB', 'Zrezygnował', 'r', 'l'], ['q2', 'q3', 'Nic', 'b', 't'],
+      ['q3', 'tel', 'Tak', 'r', 'l'], ['q3', 'q5', 'Nie · po 2 dniach roboczych', 'b', 't'], ['tel', 'q4', '', 'b', 't'],
+      ['q4', 'okT', 'Zapłaci', 'r', 'l'], ['q4', 'xT', 'Rezygnuje', 'r', 'l'], ['q4', 'sms', 'Nie odebrał', 'b', 't'], ['sms', 'q5', '', 'b', 'r'],
+      ['q5', 'okD', 'Tak', 'l', 'r'], ['q5', 'm2', 'Nie', 'b', 't'], ['m2', 'q6', '', 'b', 't'],
+      ['q6', 'okE', 'Zapłacił', 'l', 'r'], ['q6', 'ext', 'Poprosił o czas', 'r', 'l'], ['q6', 'q7', 'Nic · do dnia ' + S.termin, 'b', 't'],
+      ['ext', 'q7', '', 'b', 'r'], ['q7', 'okF', 'Tak', 'l', 'r'], ['q7', 'anul', 'Nie', 'b', 't']
+    ];
+  }
   function droga() {
-    var S = SPOSOBY[st.sposob], tel = S.tel && st.kwota === 'duza', s = st.scen, T = S.termin, D = [];
-    function pyt(o) { D.push(Object.assign({ typ: 'pyt', ik: 'pyt', kiedy: 'Pytanie' }, o)); }
-    D.push({ typ: 'krok', ik: 'koszyk', kiedy: st.sposob === 'salon' ? 'Dzień 0 · towar w salonie' : 'Dzień 0', tyt: 'Zamówienie czeka na zapłatę', opis: S.start + ' Towar jest zarezerwowany dla klienta.' });
-    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy ' + S.w1 + ', bo wielu klientów płaci samo', potw: S.w1potw ? (st.sposob === 'salon' ? 'Propozycja: rytm jak przy przelewie. Decyduje dział sprzedaży.' : 'Propozycja: ' + S.w1 + '. Decyduje dział sprzedaży.') : '' });
-    pyt({ pyt: 'Czy klient już zapłacił?', opis: 'Automat sprawdza to w sklepie tuż przed wysłaniem wiadomości.', opcje: [['Tak', 'koniec, klient nie dostaje żadnej wiadomości', 'ok'], ['Nie', 'wysyłamy pierwsze przypomnienie', 'dalej']], wyb: 1 });
-    D.push({ typ: 'wiad', ik: 'mail', kiedy: 'Wiadomość 1 z 3', tyt: 'Pierwsze przypomnienie', opis: 'Mail i SMS w tej samej chwili. Klient może od razu zapłacić za to samo zamówienie albo z niego zrezygnować.', w: 1 });
-    var o1 = [['Zapłać', 'płaci i dostaje zwykłe potwierdzenie', 'ok'], ['Nie chcę, anuluj', 'zamówienie anuluje się od razu, towar wraca do sprzedaży', 'kon'], ['Nic', 'czekamy dalej', 'dalej']];
-    if (s === 'po1') { pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 0 }); return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Klient zapłacił po pierwszym przypomnieniu. Automat nie wysyła już nic.' }]); }
-    if (s === 'rez' && !tel) { pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 1 }); return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Koniec', tyt: 'Anulowane na prośbę klienta', opis: 'Klient dostaje krótkie potwierdzenie anulowania i żadnych przypomnień więcej.' }]); }
-    pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 2 });
-    pyt({ pyt: 'Czy zamówienie jest od 10 000 zł?', opis: st.sposob === 'szybka' ? 'Przy szybkiej płatności nie dzwonimy: klient zwykle płaci sam po pierwszym przypomnieniu.' : 'Dotyczy rat, przelewu i odbioru w salonie. Co piąty klient z progu zostaje bez telefonu, żeby zmierzyć, ile telefon ratuje.',
-      opcje: [['Tak', 'dział sprzedaży dzwoni do klienta', 'dalej'], ['Nie', 'czekamy na drugie przypomnienie', 'dalej']], wyb: tel ? 0 : 1 });
+    var tel = SPOSOBY[st.sposob].tel && st.kwota === 'duza', s = st.scen, p = ['start', 'q1', 'm1', 'q2'];
+    if (s === 'po1') return p.concat(['okB']);
+    if (s === 'rez' && !tel) return p.concat(['xB']);
+    p.push('q3');
     if (tel) {
-      D.push({ typ: 'tel', ik: 'tel', kiedy: 'Rano następnego dnia roboczego po zamówieniu', tyt: 'Telefon z działu sprzedaży', opis: 'Pracownik widzi rano listę osób do obdzwonienia i powód przy każdej z nich. Dzwoni z karty klienta w Thulium, więc rozmowa zapisuje się w historii klienta.' +
-          (st.sposob === 'przelew' || st.sposob === 'salon' ? ' Przy ' + (st.sposob === 'przelew' ? 'przelewie' : 'odbiorze w salonie') + ' ten telefon wypada przed pierwszym przypomnieniem, bo ono wychodzi dopiero po 2 dniach roboczych.' : ''),
-        cytat: 'Dzień dobry, dzwonię z cyfrowe.pl w sprawie zamówienia 1400123. Widzę, że zapłata jeszcze nie przyszła. Mogę w czymś pomóc?' });
-      var odb = s === 'tel' || s === 'rez';
-      pyt({ pyt: 'Czy klient odebrał?', opcje: [['Tak', 'rozmowa', 'dalej'], ['Nie', 'pracownik wysyła krótki SMS, a przypomnienia idą dalej', 'dalej']], wyb: odb ? 0 : 1 });
-      if (odb) {
-        pyt({ pyt: 'Co ustalił pracownik?', opcje: [['Zapłaci', 'albo wybierze inny sposób zapłaty', 'ok'], ['Rezygnuje', 'pracownik anuluje zamówienie', 'kon']], wyb: s === 'rez' ? 1 : 0 });
-        if (s === 'rez') return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Koniec', tyt: 'Anulowane po rozmowie', opis: 'Klient powiedział, że rezygnuje. Pracownik anuluje zamówienie i towar wraca do sprzedaży.' }]);
-        D.push({ typ: 'czas', ik: 'zegar', tyt: 'Klient płaci tego samego dnia' });
-        return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Gdy wpłata przyjdzie, automat nie wysyła już drugiego przypomnienia.' }]);
-      }
-      D.push({ typ: 'tel', ik: 'sms', kiedy: 'Zaraz po próbie', tyt: 'SMS od pracownika', opis: 'Aplikacja podsuwa gotowy tekst, pracownik wysyła go jednym kliknięciem.', sms: 'cyfrowe.pl: probowalismy sie dodzwonic w sprawie zamowienia 1400123. Zaplac lub oddzwon: cyfrowe.pl/zaplac/1400123' });
+      p.push('tel', 'q4');
+      if (s === 'tel') return p.concat(['okT']);
+      if (s === 'rez') return p.concat(['xT']);
+      p.push('sms');
     }
-    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy 2 dni robocze od pierwszego przypomnienia' });
-    pyt({ pyt: 'Czy klient już zapłacił?', opis: 'Znów sprawdzenie tuż przed wysyłką.', opcje: [['Tak', 'koniec, bez kolejnych wiadomości', 'ok'], ['Nie', 'wysyłamy drugie przypomnienie', 'dalej']], wyb: 1 });
-    D.push({ typ: 'wiad', ik: 'mail', kiedy: 'Wiadomość 2 z 3', tyt: 'Drugie przypomnienie z datą', opis: 'Wiadomość podaje dokładny dzień, po którym zamówienie zostanie anulowane. Klient może poprosić o więcej czasu.', w: 2 });
-    var o2 = [['Zapłać', 'płaci i dostaje potwierdzenie', 'ok'], ['Więcej czasu', 'termin przesuwa się o 7 dni, jeden raz', 'dalej'], ['Nie chcę, anuluj', 'anulowanie od razu', 'kon'], ['Nic', 'czekamy do terminu', 'dalej']];
-    pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o2, wyb: s === 'czas' ? 1 : 3 });
-    if (s === 'czas') {
-      D.push({ typ: 'krok', ik: 'kal', kiedy: 'Przedłużenie', tyt: 'Termin przesuwa się o 7 dni', opis: 'Jeden raz, bez telefonu i bez wyjątków. Przycisk „Więcej czasu” drugi raz się nie pokaże.' });
-      D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy do nowego terminu' });
-      pyt({ pyt: 'Czy klient zapłacił przed terminem?', opcje: [['Tak', 'zamówienie idzie do realizacji', 'ok'], ['Nie', 'anulowanie', 'kon']], wyb: 0 });
-      return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Klient zapłacił w przedłużonym terminie.' }]);
-    }
-    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy do dnia ' + T + (st.sposob === 'salon' ? ' od chwili, gdy towar czeka w salonie' : '') });
-    pyt({ pyt: 'Czy klient zapłacił przed terminem?', opis: 'Ostatnie sprawdzenie w dniu terminu o 9:00.', opcje: [['Tak', 'zamówienie idzie do realizacji', 'ok'], ['Nie', 'anulowanie', 'kon']], wyb: 1 });
-    return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Wiadomość 3 z 3 · dzień ' + T + ', 9:00', tyt: 'Anulowanie i spokojna wiadomość', opis: 'Sklep zwalnia towar. Klient dostaje mail i SMS bez wyrzutu, z przyciskiem do odtworzenia zamówienia.', w: 3,
-      uwaga: 'Dziś mail o anulowaniu nie dochodzi do klienta. IT musi to naprawić przed startem.' }]);
+    p.push('q5', 'm2', 'q6');
+    if (s === 'czas') return p.concat(['ext', 'q7', 'okF']);
+    return p.concat(['q7', 'anul']);
+  }
+
+  var W, E, P;
+  function rysuj() {
+    W = wezly(); E = krawedzie(); P = droga();
+    var tel = SPOSOBY[st.sposob].tel && st.kwota === 'duza';
+    var mapa = document.getElementById('mapa');
+    mapa.querySelectorAll('.w, .et').forEach(function (n) { n.remove(); });
+    Object.keys(W).forEach(function (id) {
+      var n = W[id], d = document.createElement('button');
+      d.className = 'w ' + n.typ + (P.indexOf(id) >= 0 ? ' na' : ' poza') + (st.wyb === id ? ' wyb' : '');
+      d.dataset.id = id; d.style.left = n.x + '%'; d.style.top = n.y + 'px';
+      if (!tel && (id === 'tel' || id === 'q4' || id === 'okT' || id === 'xT' || id === 'sms')) d.style.opacity = .22;
+      d.innerHTML = '<span class="k">' + (n.typ === 'pyt' ? '?' : ik(n.ik)) + '</span><span><span class="t1" style="display:block">' + esc(n.t1) + '</span>' + (n.t2 ? '<span class="t2" style="display:block">' + esc(n.t2) + '</span>' : '') + '</span>' +
+        (n.potw ? '<span class="potw" title="Propozycja do decyzji działu sprzedaży">?</span>' : '');
+      mapa.appendChild(d);
+    });
+    linie();
+    panel(st.wyb);
+  }
+  function kotwica(el, strona, m) {
+    var r = el.getBoundingClientRect(), x = r.left - m.left, y = r.top - m.top;
+    if (strona === 'b') return [x + r.width / 2, y + r.height];
+    if (strona === 't') return [x + r.width / 2, y];
+    if (strona === 'l') return [x, y + r.height / 2];
+    return [x + r.width, y + r.height / 2];
+  }
+  var KIER = { b: [0, 1], t: [0, -1], l: [-1, 0], r: [1, 0] };
+  function linie() {
+    var mapa = document.getElementById('mapa'), m = mapa.getBoundingClientRect(), svg = document.getElementById('linie'), h = '';
+    mapa.querySelectorAll('.et').forEach(function (n) { n.remove(); });
+    var naDrodze = {};
+    for (var i = 1; i < P.length; i++) naDrodze[P[i - 1] + '>' + P[i]] = 1;
+    E.forEach(function (e) {
+      var a = mapa.querySelector('.w[data-id="' + e[0] + '"]'), b = mapa.querySelector('.w[data-id="' + e[1] + '"]');
+      if (!a || !b) return;
+      var p0 = kotwica(a, e[3], m), p1 = kotwica(b, e[4], m), k0 = KIER[e[3]], k1 = KIER[e[4]];
+      var dl = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]), s = Math.max(40, Math.min(140, dl / 2.2));
+      var d = 'M' + p0[0] + ' ' + p0[1] + ' C' + (p0[0] + k0[0] * s) + ' ' + (p0[1] + k0[1] * s) + ' ' + (p1[0] + k1[0] * s) + ' ' + (p1[1] + k1[1] * s) + ' ' + p1[0] + ' ' + p1[1];
+      var na = naDrodze[e[0] + '>' + e[1]], dok = W[e[1]].typ;
+      h += '<path class="li' + (na ? ' na' + (dok === 'ok' ? ' do-ok' : dok === 'kon' ? ' do-kon' : '') : '') + '" d="' + d + '" data-e="' + e[0] + '>' + e[1] + '"/>';
+    });
+    svg.setAttribute('viewBox', '0 0 ' + m.width + ' ' + m.height);
+    svg.innerHTML = h;
+    E.forEach(function (e) {
+      if (!e[2]) return;
+      var p = svg.querySelector('path[data-e="' + e[0] + '>' + e[1] + '"]'); if (!p) return;
+      var L2 = p.getTotalLength(), pt = p.getPointAtLength(L2 * (e[3] === 'b' && e[4] === 't' ? .5 : .45)), et = document.createElement('div');
+      et.className = 'et' + (naDrodze[e[0] + '>' + e[1]] ? ' na' : '') + (e[5] ? ' czas' : '');
+      et.style.left = pt.x + 'px'; et.style.top = pt.y + 'px'; et.textContent = e[2];
+      mapa.appendChild(et);
+    });
   }
 
   function wiadomosc(nr) {
@@ -246,29 +296,27 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
       przyc.map(function (p, i) { return '<span class="' + (i ? 'j' : '') + '">' + esc(p) + '</span>'; }).join('') + '</div></div>' +
       '<div class="tel-ekran sms"><div class="g">' + ik('sms') + 'SMS w tej samej chwili</div><div class="t">' + esc(sms) + '</div></div>';
   }
-
-  function element(e, i) {
-    var h = '<div class="el ' + e.typ + '" data-i="' + i + '"><div class="kolo">' + ik(e.ik) + '</div><div class="karta">';
-    if (e.typ === 'czas') return h + '<div class="tyt">' + esc(e.tyt) + '</div>' + (e.potw ? '<span class="potw">' + esc(e.potw) + '</span>' : '') + '</div></div>';
-    h += (e.kiedy ? '<div class="kiedy">' + esc(e.kiedy) + '</div>' : '') + '<div class="tyt">' + esc(e.typ === 'pyt' ? e.pyt : e.tyt) + '</div>' + (e.opis ? '<div class="opis">' + esc(e.opis) + '</div>' : '');
-    if (e.typ === 'pyt') h += '<div class="opcje">' + e.opcje.map(function (o, k) {
-      return '<div class="opcja t-' + o[2] + (k === e.wyb ? ' wyb' : '') + '"><span class="odp">' + esc(o[0]) + '</span><span class="sk">' + esc(o[1]) + '</span>' + (k === e.wyb ? '<span class="str">w tym przykładzie</span>' : '') + '</div>';
-    }).join('') + '</div>';
-    if (e.cytat) h += '<div class="cytat">„' + esc(e.cytat) + '”</div>';
-    if (e.sms) h += '<div class="wiadomosci otw" style="grid-template-columns:1fr"><div class="tel-ekran sms"><div class="g">' + ik('sms') + 'SMS od pracownika</div><div class="t">' + esc(e.sms) + '</div></div></div>';
-    if (e.w) h += '<button class="pokazWiad" data-w="' + i + '">Zobacz, co dostaje klient</button><div class="wiadomosci" id="w' + i + '">' + wiadomosc(e.w) + '</div>';
-    if (e.uwaga) h += '<div class="uwaga">' + esc(e.uwaga) + '</div>';
-    return h + '</div></div>';
+  function streszczenie() {
+    var tel = P.indexOf('tel') >= 0, ile = P.filter(function (p) { return W[p].w; }).length, kon = W[P[P.length - 1]];
+    return '<div class="streszcz"><b>W tym przykładzie:</b> klient dostaje ' + ile + (ile === 1 ? ' wiadomość' : ' wiadomości') + ' od automatu' + (tel ? ', dzwoni do niego dział sprzedaży' : '') +
+      ', a na końcu zamówienie jest <b>' + (kon.typ === 'ok' ? 'opłacone' : 'anulowane') + '</b>.</div>';
   }
-
-  function rysuj() {
-    var D = droga(), S = SPOSOBY[st.sposob], sc = SCEN.filter(function (x) { return x[0] === st.scen; })[0][1];
-    document.getElementById('tytulDrogi').textContent = S.n + ', ' + (st.kwota === 'duza' ? 'od 10 000 zł' : 'do 10 000 zł') + ': ' + sc.toLowerCase();
-    var kon = D[D.length - 1];
-    var ileW = D.filter(function (e) { return e.typ === 'wiad' || e.w; }).length;
-    document.getElementById('podDrogi').textContent = ileW + (ileW === 1 ? ' wiadomość' : ' wiadomości') + ' od automatu, ' +
-      (D.some(function (e) { return e.ik === 'tel'; }) ? 'telefon z działu sprzedaży, ' : 'bez telefonu, ') + 'na końcu: ' + kon.tyt.toLowerCase() + '.';
-    document.getElementById('droga').innerHTML = D.map(element).join('');
+  function panel(id) {
+    var b = document.getElementById('boczny');
+    if (!id) {
+      b.innerHTML = '<div class="kiedy">Jak czytać mapę?</div><div class="tyt">Kolorowa linia to droga klienta z wybranego przykładu</div>' +
+        '<div class="opis">Przerywane szare linie to inne możliwe drogi. Pomarańczowe kafle to pytania: w nich droga się rozdziela. Podpisy na liniach mówią, kiedy coś się dzieje.</div>' +
+        streszczenie() + '<div class="wskaz">Kliknij dowolny kafel na mapie, żeby zobaczyć szczegóły.</div>';
+      return;
+    }
+    var n = W[id], h = '<div class="kiedy">' + esc(n.kiedy) + '</div><div class="tyt">' + esc(n.t1) + '</div><div class="opis">' + esc(n.opis) + '</div>';
+    if (n.wyj) h += '<ul class="wyjscia">' + n.wyj.map(function (w) { return '<li><b>' + esc(w[0]) + '</b><span>' + esc(w[1]) + '</span></li>'; }).join('') + '</ul>';
+    if (n.w) h += wiadomosc(n.w);
+    if (n.cytat) h += '<div class="cytat">„Dzień dobry, dzwonię z cyfrowe.pl w sprawie zamówienia 1400123. Widzę, że zapłata jeszcze nie przyszła. Mogę w czymś pomóc?”</div>';
+    if (n.smsP) h += '<div class="tel-ekran sms"><div class="g">' + ik('sms') + 'SMS od pracownika</div><div class="t">cyfrowe.pl: probowalismy sie dodzwonic w sprawie zamowienia 1400123. Zaplac lub oddzwon: cyfrowe.pl/zaplac/1400123</div></div>';
+    if (n.potw) h += '<div class="uwaga">' + esc(n.potwT) + '</div>';
+    if (n.uwaga) h += '<div class="uwaga">' + esc(n.uwaga) + '</div>';
+    b.innerHTML = h + streszczenie();
   }
 
   function seg(id, opcje, k) {
@@ -289,8 +337,9 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
       if ((st.scen === 'tel' || st.scen === 'nieodb') && !(SPOSOBY[st.sposob].tel && st.kwota === 'duza')) st.scen = 'nic';
       ster(); rysuj(); return;
     }
-    if (b.dataset.w != null) { var w = document.getElementById('w' + b.dataset.w); w.classList.toggle('otw'); b.textContent = w.classList.contains('otw') ? 'Schowaj wiadomość' : 'Zobacz, co dostaje klient'; }
+    if (b.dataset.id) { st.wyb = st.wyb === b.dataset.id ? null : b.dataset.id; rysuj(); }
   });
+  var tm; window.addEventListener('resize', function () { clearTimeout(tm); tm = setTimeout(linie, 120); });
 
   var DEC = [
     ['Liczba wiadomości', '2 przypomnienia i wiadomość o anulowaniu, zawsze mail i SMS razem.', 'ustalone 3.11', 'ok'],
@@ -305,6 +354,7 @@ h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; 
   ];
   document.getElementById('dec').innerHTML = DEC.map(function (d) { return '<div class="dc"><span class="co">' + esc(d[0]) + '</span><span class="ja">' + esc(d[1]) + '</span><span class="chip ' + d[3] + '">' + esc(d[2]) + '</span></div>'; }).join('');
   ster(); rysuj();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(linie);
 })();
 </script>
 </body>
