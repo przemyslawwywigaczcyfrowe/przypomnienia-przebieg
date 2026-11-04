@@ -4,324 +4,233 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Przypomnienia o zapłacie · graf decyzyjny</title>
+<title>Przypomnienia o zapłacie · droga klienta</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..700&family=Figtree:wght@400..800&display=swap">
 <style>
 :root {
-  --paper:#F0F4F9; --edge:#C3CEDE; --edge-2:#DADCE0; --rule:#E3E6EA; --hair:#EEF1F4;
-  --ink:#111318; --ink2:#454B54; --muted:#5A616A;
+  --paper:#F4F6FA; --edge:#DCE3EC; --rule:#E7EBF0; --hair:#F0F2F5;
+  --ink:#111318; --ink2:#454B54; --muted:#69707A;
   --acc:#0B57D0; --acc-dark:#0842A0; --acc-soft:#D3E3FD; --acc-tint:#EEF3FE;
-  --good:#146C2E; --good-soft:#E6F4EA; --bad:#B3261E; --bad-soft:#FCE8E6; --warn:#9A3412; --warn-soft:#FEEFE3;
-  --tel:#6D3FE0; --tel-soft:#EDE7FF; --gate:#B45309; --gate-soft:#FFF4E0;
+  --good:#146C2E; --good-soft:#E3F4E8; --bad:#B3261E; --bad-soft:#FCEAE8;
+  --tel:#6D3FE0; --tel-soft:#EFEAFE; --gate:#A15C07; --gate-soft:#FFF5E3; --warn:#9A3412; --warn-soft:#FEEFE3;
   --fg:"Google Sans Flex","Google Sans",Roboto,Arial,sans-serif; --f:Figtree,system-ui,"Segoe UI",sans-serif;
+  --cien:0 1px 2px rgba(16,24,40,.04),0 6px 20px rgba(16,24,40,.06);
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 html, body { background:var(--paper); }
-body { font-family:var(--f); color:var(--ink); font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased; }
+body { font-family:var(--f); color:var(--ink); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased; }
 button { font:inherit; color:inherit; cursor:pointer; }
-.wrap { max-width:1560px; margin:0 auto; padding:28px 32px 48px; }
-.ic { width:18px; height:18px; fill:currentColor; flex:none; }
-.hero { background:#fff; border:1px solid var(--edge); border-radius:28px; padding:26px 32px; margin-bottom:16px; }
-.kicker { font-size:13.5px; font-weight:600; color:var(--muted); }
-h1 { font-size:36px; font-weight:800; letter-spacing:-.02em; line-height:1.12; margin:6px 0 8px; }
-.zd { color:var(--ink2); font-size:16px; max-width:900px; }
-.leg { display:flex; gap:18px; flex-wrap:wrap; font-size:13.5px; color:var(--ink2); margin-top:14px; }
-.leg span { display:inline-flex; align-items:center; gap:8px; }
-.leg i { display:inline-block; width:16px; height:12px; border-radius:4px; }
-.leg i.romb { width:12px; height:12px; border-radius:2px; transform:rotate(45deg); background:var(--gate-soft); border:1.5px solid var(--gate); }
-.ster { background:#fff; border:1px solid var(--edge); border-radius:28px; padding:18px 22px; margin-bottom:16px;
-  display:flex; flex-wrap:wrap; gap:14px 26px; align-items:flex-end; }
+.ic { width:22px; height:22px; fill:currentColor; flex:none; }
+.wrap { max-width:1180px; margin:0 auto; padding:40px 32px 64px; }
+
+/* nagłówek */
+.kicker { font:600 14px var(--fg); color:var(--acc-dark); letter-spacing:.02em; }
+h1 { font-size:44px; font-weight:800; letter-spacing:-.025em; line-height:1.08; margin:10px 0 14px; max-width:860px; }
+.zd { color:var(--ink2); font-size:18px; max-width:760px; }
+.liczby { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:30px 0 34px; }
+.liczba { background:#fff; border-radius:24px; padding:20px 22px; box-shadow:var(--cien); }
+.liczba .v { font-size:34px; font-weight:800; letter-spacing:-.02em; line-height:1.1; color:var(--acc-dark); }
+.liczba .t { font-weight:700; margin-top:6px; }
+.liczba .s { font-size:14px; color:var(--muted); margin-top:2px; }
+
+/* sterowanie */
+.ster { position:sticky; top:12px; z-index:20; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-radius:24px; padding:16px 20px;
+  box-shadow:var(--cien); display:flex; flex-wrap:wrap; gap:14px 24px; align-items:flex-end; margin-bottom:34px; }
 .grupa { display:flex; flex-direction:column; gap:6px; }
-.grupa .t { font-size:12.5px; font-weight:700; color:var(--muted); }
-.seg { display:inline-flex; flex-wrap:wrap; padding:4px; gap:2px; border-radius:999px; background:var(--paper); border:1px solid var(--rule); }
-.seg button { border:0; background:none; font:500 14px var(--f); color:var(--ink2); height:36px; padding:0 15px; border-radius:999px; white-space:nowrap; }
-.seg button.on { background:#fff; color:var(--ink); font-weight:700; box-shadow:0 1px 2px rgba(60,64,67,.15),0 1px 3px rgba(60,64,67,.1); }
-.seg button[disabled] { opacity:.4; cursor:not-allowed; }
-.graj { margin-left:auto; display:flex; gap:8px; }
-.btn { height:44px; padding:0 20px; border-radius:999px; border:0; background:var(--acc); color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; }
+.grupa .t { font-size:13px; font-weight:700; color:var(--muted); }
+.seg { display:inline-flex; flex-wrap:wrap; gap:6px; }
+.seg button { border:1px solid var(--edge); background:#fff; font:600 14px var(--f); color:var(--ink2); height:38px; padding:0 16px; border-radius:999px; white-space:nowrap; transition:all .2s; }
+.seg button:hover { border-color:var(--acc); color:var(--acc-dark); }
+.seg button.on { background:var(--ink); border-color:var(--ink); color:#fff; }
+.seg button[disabled] { opacity:.35; cursor:not-allowed; }
+.graj { margin-left:auto; }
+.btn { height:46px; padding:0 22px; border-radius:999px; border:0; background:var(--acc); color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 14px rgba(11,87,208,.3); }
 .btn:hover { background:var(--acc-dark); }
-.btn.jasny { background:#fff; color:var(--acc-dark); border:1px solid var(--edge-2); }
-.uklad { display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:16px; align-items:start; }
-.karta { background:#fff; border:1px solid var(--edge); border-radius:28px; padding:20px 22px; }
-.graf { padding:14px 10px; }
-svg.g { width:100%; height:auto; display:block; }
-.wz { cursor:pointer; outline:none; }
-.wz rect, .wz polygon { transition:fill .4s, stroke .4s, stroke-width .4s; }
-.wz text { font-family:var(--f); pointer-events:none; transition:fill .4s; }
-.wz .t1 { font-size:15px; font-weight:700; fill:var(--ink); }
-.wz .t2 { font-size:12.5px; font-weight:500; fill:var(--muted); }
-.k-krok rect { fill:#fff; stroke:var(--edge); stroke-width:1.5; }
-.k-wiad rect { fill:var(--acc-tint); stroke:var(--acc-soft); stroke-width:1.5; }
-.k-tel rect { fill:var(--tel-soft); stroke:#D3C6FB; stroke-width:1.5; }
-.k-czas rect { fill:#F7F8FA; stroke:#C9D0DA; stroke-width:1.5; stroke-dasharray:5 4; }
-.k-bramka polygon { fill:var(--gate-soft); stroke:#F3D19B; stroke-width:1.5; }
-.k-ok rect { fill:var(--good-soft); stroke:#B7E0C3; stroke-width:1.5; }
-.k-kon rect { fill:var(--bad-soft); stroke:#F2BDB8; stroke-width:1.5; }
-.wz:hover rect, .wz:hover polygon, .wz:focus rect, .wz:focus polygon { stroke:var(--acc); }
-.wz.akt.k-krok rect, .wz.akt.k-czas rect { stroke:var(--ink2); stroke-width:2.5; }
-.wz.akt.k-wiad rect { fill:var(--acc); stroke:var(--acc); }
-.wz.akt.k-tel rect { fill:var(--tel); stroke:var(--tel); }
-.wz.akt.k-bramka polygon { fill:var(--gate); stroke:var(--gate); }
-.wz.akt.k-ok rect { fill:var(--good); stroke:var(--good); }
-.wz.akt.k-kon rect { fill:var(--bad); stroke:var(--bad); }
-.wz.akt.k-wiad text, .wz.akt.k-tel text, .wz.akt.k-bramka text, .wz.akt.k-ok text, .wz.akt.k-kon text { fill:#fff; }
-.wz.teraz rect, .wz.teraz polygon { filter:drop-shadow(0 0 10px rgba(11,87,208,.5)); }
-.wz.wyl { opacity:.28; }
-.wz .potw { fill:var(--warn); } .wz .potwT { fill:#fff; font-size:12px; font-weight:800; }
-.kr path { fill:none; stroke:#B8C2D1; stroke-width:2; transition:stroke .3s, stroke-width .3s; }
-.kr.akt path { stroke:var(--acc); stroke-width:3.5; }
-.kr.wyl path { stroke:#E4E8EE; }
-.kr text { font-family:var(--fg); font-size:12.5px; font-weight:700; fill:var(--ink2); }
-.kr .etb { fill:#fff; stroke:var(--rule); }
-.kr.akt text { fill:var(--acc-dark); } .kr.akt .etb { stroke:var(--acc-soft); }
-.kropka { fill:var(--acc); filter:drop-shadow(0 0 6px rgba(11,87,208,.8)); }
-.boczny { position:sticky; top:16px; }
-.krok-kiedy { font:700 12.5px var(--fg); color:var(--acc-dark); text-transform:uppercase; letter-spacing:.05em; }
-.krok-tyt { font-size:22px; font-weight:800; line-height:1.2; margin:4px 0 8px; }
-.krok-opis { color:var(--ink2); }
-.wiad { margin-top:14px; border:1px solid var(--rule); border-radius:18px; overflow:hidden; }
-.wiad .g { display:flex; align-items:center; gap:8px; padding:9px 14px; background:var(--paper); font-size:12.5px; font-weight:700; color:var(--muted); }
-.wiad .b { padding:12px 14px; font-size:14px; }
-.wiad .b b { display:block; font-size:15px; margin-bottom:4px; }
-.wiad .przyc { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
-.wiad .przyc span { font-size:12.5px; font-weight:700; padding:5px 11px; border-radius:999px; background:var(--acc); color:#fff; }
-.wiad .przyc span.j { background:#fff; color:var(--acc-dark); border:1px solid var(--edge-2); }
-.sms .b { font-family:ui-monospace,Consolas,monospace; font-size:13px; background:#F7F9FC; }
-.wyjscia { list-style:none; margin-top:12px; }
-.wyjscia li { display:flex; gap:10px; padding:8px 0; border-bottom:1px solid var(--hair); font-size:14px; }
-.wyjscia li:last-child { border-bottom:0; }
-.wyjscia b { min-width:118px; color:var(--gate); }
-.uwaga { margin-top:12px; font-size:13px; color:var(--warn); background:var(--warn-soft); border-radius:12px; padding:8px 12px; }
-.nota { font-size:13px; color:var(--muted); margin-top:12px; }
-.droga { display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
-.droga span { font-size:12px; font-weight:650; padding:3px 9px; border-radius:999px; background:var(--paper); color:var(--ink2); border:1px solid var(--rule); }
-.droga span.on { background:var(--acc); color:#fff; border-color:var(--acc); }
-.wynik { margin-top:14px; display:flex; gap:8px; align-items:center; font-weight:700; }
-.chip { display:inline-flex; align-items:center; height:28px; padding:0 12px; border-radius:999px; font-size:13px; font-weight:650; background:var(--paper); border:1px solid var(--rule); color:var(--ink2); }
-.chip.ok { background:var(--good-soft); color:var(--good); border-color:#C4E7CF; }
-.chip.bad { background:var(--bad-soft); color:var(--bad); border-color:#F5C6C2; }
-.chip.nb { background:var(--acc-tint); color:var(--acc-dark); border-color:var(--acc-soft); }
-.chip.warn { background:var(--warn-soft); color:var(--warn); border-color:#F6CFB4; }
-.sekcja { margin-top:16px; }
-.sekcja h2 { font-size:19px; font-weight:750; margin-bottom:4px; }
-.pod { color:var(--muted); font-size:14px; margin-bottom:14px; }
-.dec { list-style:none; }
-.dec li { display:grid; grid-template-columns:220px minmax(0,1fr) 200px; gap:14px; padding:12px 0; border-bottom:1px solid var(--hair); }
-.dec li:last-child { border-bottom:0; }
-.dec .co { font-weight:700; }
-.foot { margin-top:20px; font-size:12.5px; color:var(--muted); }
-@media (max-width:1200px) { .uklad { grid-template-columns:minmax(0,1fr); } .boczny { position:static; } }
-@media (max-width:760px) {
-  .wrap { padding:16px; } h1 { font-size:27px; } .hero, .ster, .karta { padding:18px 16px; border-radius:22px; }
-  .seg { border-radius:18px; } .seg button { height:34px; padding:0 12px; font-size:13.5px; } .graj { margin-left:0; }
-  .graf { overflow-x:auto; } svg.g { min-width:760px; } .dec li { grid-template-columns:1fr; gap:4px; }
+
+/* droga */
+.tytulDrogi { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
+.podDrogi { color:var(--muted); margin-bottom:26px; }
+.droga { position:relative; padding-left:72px; }
+.droga::before { content:""; position:absolute; left:27px; top:28px; bottom:28px; width:2px; background:var(--rule); }
+.postep { position:absolute; left:27px; top:28px; width:2px; height:0; background:linear-gradient(var(--acc), #6D9EEB); transition:height .6s ease; }
+.el { position:relative; margin-bottom:18px; opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+.el.pokaz { opacity:1; transform:none; }
+.kolo { position:absolute; left:-72px; top:14px; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:#fff; color:var(--muted);
+  box-shadow:0 0 0 6px var(--paper), var(--cien); }
+.el.krok .kolo { color:var(--ink2); }
+.el.wiad .kolo { background:var(--acc); color:#fff; }
+.el.tel .kolo { background:var(--tel); color:#fff; }
+.el.czas .kolo { background:#fff; color:var(--muted); }
+.el.pyt .kolo { background:var(--gate-soft); color:var(--gate); }
+.el.ok .kolo { background:var(--good); color:#fff; }
+.el.kon .kolo { background:var(--bad); color:#fff; }
+.karta { background:#fff; border-radius:24px; padding:20px 24px; box-shadow:var(--cien); }
+.el.czas .karta { background:transparent; box-shadow:none; padding:16px 4px; }
+.el.czas .tyt { color:var(--muted); font-weight:700; font-size:16px; }
+.kiedy { font:700 12.5px var(--fg); text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.el.wiad .kiedy { color:var(--acc-dark); } .el.tel .kiedy { color:var(--tel); } .el.pyt .kiedy { color:var(--gate); }
+.tyt { font-size:21px; font-weight:800; line-height:1.25; margin:3px 0 4px; letter-spacing:-.01em; }
+.opis { color:var(--ink2); }
+.potw { display:inline-flex; margin-top:10px; font-size:13px; font-weight:600; color:var(--warn); background:var(--warn-soft); border-radius:999px; padding:4px 12px; }
+
+/* pytanie */
+.el.pyt .karta { background:linear-gradient(180deg,#FFFBF3,#fff); border:1px solid #F6E3BF; }
+.opcje { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+.opcja { display:flex; gap:12px; align-items:center; border-radius:16px; padding:10px 14px; background:var(--hair); color:var(--muted); transition:all .4s; }
+.opcja .odp { font-weight:800; min-width:120px; font-size:15px; }
+.opcja .sk { font-size:14.5px; }
+.opcja.wyb { background:var(--ink); color:#fff; transform:scale(1.01); box-shadow:0 6px 16px rgba(17,19,24,.18); }
+.opcja.wyb.t-ok { background:var(--good); } .opcja.wyb.t-kon { background:var(--bad); } .opcja.wyb.t-dalej { background:var(--acc); }
+.opcja .str { margin-left:auto; font-size:12.5px; font-weight:700; opacity:.85; white-space:nowrap; }
+
+/* wiadomość */
+.pokazWiad { margin-top:12px; border:0; background:var(--acc-tint); color:var(--acc-dark); font-weight:700; font-size:14px; padding:7px 14px; border-radius:999px; }
+.wiadomosci { display:none; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+.wiadomosci.otw { display:grid; }
+.tel-ekran { border-radius:20px; background:#F7F9FC; border:1px solid var(--rule); padding:14px 16px; font-size:14px; }
+.tel-ekran .g { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; color:var(--muted); margin-bottom:8px; }
+.tel-ekran .g .ic { width:16px; height:16px; }
+.tel-ekran b { display:block; font-size:15px; margin-bottom:4px; }
+.tel-ekran.sms .t { background:#fff; border-radius:16px 16px 16px 4px; padding:10px 12px; box-shadow:0 1px 2px rgba(0,0,0,.06); }
+.przyc { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.przyc span { font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:999px; background:var(--acc); color:#fff; }
+.przyc span.j { background:#fff; color:var(--acc-dark); border:1px solid var(--edge); }
+.cytat { margin-top:12px; font-size:15px; color:var(--ink2); background:var(--tel-soft); border-radius:16px; padding:12px 14px; }
+.uwaga { margin-top:10px; font-size:13.5px; color:var(--warn); }
+
+/* koniec */
+.el.ok .karta { background:var(--good-soft); box-shadow:none; }
+.el.kon .karta { background:var(--bad-soft); box-shadow:none; }
+.el.ok .tyt { color:var(--good); } .el.kon .tyt { color:var(--bad); }
+
+/* zatwierdzenie */
+.sekcja { margin-top:46px; }
+.sekcja h2 { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
+.sekcja .pod { color:var(--muted); margin-bottom:18px; }
+.dec { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.dc { background:#fff; border-radius:22px; padding:18px 20px; box-shadow:var(--cien); display:flex; flex-direction:column; gap:6px; }
+.dc .co { font-weight:800; }
+.dc .ja { font-size:14.5px; color:var(--ink2); flex:1; }
+.chip { align-self:flex-start; display:inline-flex; align-items:center; height:28px; padding:0 12px; border-radius:999px; font-size:13px; font-weight:700; }
+.chip.ok { background:var(--good-soft); color:var(--good); } .chip.warn { background:var(--warn-soft); color:var(--warn); }
+.chip.bad { background:var(--bad-soft); color:var(--bad); } .chip.nb { background:var(--acc-tint); color:var(--acc-dark); }
+.foot { margin-top:30px; font-size:13px; color:var(--muted); }
+
+@media (max-width:900px) { .liczby { grid-template-columns:1fr 1fr; } .dec { grid-template-columns:1fr; } .wiadomosci { grid-template-columns:1fr; } }
+@media (max-width:600px) {
+  .wrap { padding:22px 16px 40px; } h1 { font-size:30px; } .zd { font-size:16px; } .liczba .v { font-size:26px; }
+  .droga { padding-left:52px; } .droga::before, .postep { left:19px; } .kolo { left:-52px; width:40px; height:40px; } .kolo .ic { width:18px; height:18px; }
+  .karta { padding:16px 16px; } .tyt { font-size:18px; } .opcja { flex-wrap:wrap; } .opcja .odp { min-width:0; } .opcja .str { margin-left:0; }
+  .graj { margin-left:0; } .ster { position:static; }
 }
-@media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+@media (prefers-reduced-motion:reduce) { * { transition:none !important; } .el { opacity:1; transform:none; } }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute">
+  <symbol id="i-koszyk" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM5.2 4H2V2h4.6l.9 2H21l-3.2 8H8.4l-.9 2H19v2H4.3l2.6-5L5.2 4z"/></symbol>
+  <symbol id="i-zegar" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h-5v-2h3V6h2v7z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></symbol>
   <symbol id="i-sms" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM8 11H6V9h2v2zm5 0h-2V9h2v2zm5 0h-2V9h2v2z"/></symbol>
   <symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></symbol>
+  <symbol id="i-pyt" viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-14a4 4 0 0 0-4 4h2a2 2 0 1 1 4 0c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5a4 4 0 0 0-4-4z"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></symbol>
+  <symbol id="i-kal" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z"/></symbol>
   <symbol id="i-graj" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
-  <symbol id="i-pauza" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></symbol>
-  <symbol id="i-od" viewBox="0 0 24 24"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
 </svg>
 
 <div class="wrap">
-  <header class="hero">
-    <div class="kicker">Przypomnienia o zapłacie · graf decyzyjny do zatwierdzenia · ustalenia z Asany z 3.11.2026</div>
-    <h1>Co się dzieje, gdy klient zamówił i nie zapłacił?</h1>
-    <div class="zd">Każdy romb to bramka: automat albo pracownik sprawdza coś i wybiera drogę. Wybierz, jak zachowa się klient, i kliknij „Odtwórz”, a graf przeprowadzi go od zamówienia do końca. Kliknięcie w dowolny element pokazuje, co dokładnie się dzieje i jaką wiadomość dostaje klient.</div>
-    <div class="leg">
-      <span><i style="background:#fff;border:1.5px solid var(--edge)"></i>stan zamówienia</span>
-      <span><i style="background:#F7F8FA;border:1.5px dashed #C9D0DA"></i>czekanie</span>
-      <span><i class="romb"></i>bramka decyzyjna</span>
-      <span><i style="background:var(--acc-tint);border:1.5px solid var(--acc-soft)"></i>mail i SMS od automatu</span>
-      <span><i style="background:var(--tel-soft);border:1.5px solid #D3C6FB"></i>dział sprzedaży</span>
-      <span><i style="background:var(--good-soft);border:1.5px solid #B7E0C3"></i>zapłacone</span>
-      <span><i style="background:var(--bad-soft);border:1.5px solid #F2BDB8"></i>anulowane</span>
-    </div>
-  </header>
+  <div class="kicker">Przypomnienia o zapłacie · do zatwierdzenia</div>
+  <h1>Klient zamówił i nie zapłacił. Co dalej?</h1>
+  <div class="zd">Tak będzie wyglądać droga klienta po wprowadzeniu automatu. Wybierz sposób zapłaty i to, jak zachowa się klient. Przy każdym pytaniu widać też, co by się stało przy innej odpowiedzi.</div>
 
-  <section class="ster">
+  <div class="liczby">
+    <div class="liczba"><div class="v">2</div><div class="t">przypomnienia</div><div class="s">i wiadomość o anulowaniu, zawsze mail i SMS razem</div></div>
+    <div class="liczba"><div class="v">0</div><div class="t">wiadomości po wpłacie</div><div class="s">automat sprawdza zamówienie przed każdą wysyłką</div></div>
+    <div class="liczba"><div class="v">10 000 zł</div><div class="t">od tej kwoty dzwonimy</div><div class="s">przy ratach, przelewie i odbiorze w salonie</div></div>
+    <div class="liczba"><div class="v">5 albo 7</div><div class="t">dni na zapłatę</div><div class="s">5 przy szybkiej płatności, 7 przy pozostałych</div></div>
+  </div>
+
+  <div class="ster">
     <div class="grupa"><span class="t">Jak klient chciał zapłacić?</span><div class="seg" id="sSposob"></div></div>
     <div class="grupa"><span class="t">Ile kosztuje zamówienie?</span><div class="seg" id="sKwota"></div></div>
     <div class="grupa"><span class="t">Co robi klient?</span><div class="seg" id="sScen"></div></div>
-    <div class="graj">
-      <button class="btn" id="graj"><svg class="ic"><use href="#i-graj"/></svg><span>Odtwórz</span></button>
-      <button class="btn jasny" id="odNowa"><svg class="ic"><use href="#i-od"/></svg>Od początku</button>
-    </div>
-  </section>
-
-  <div class="uklad">
-    <section class="karta graf"><svg class="g" id="g" viewBox="0 0 1340 1790" role="img" aria-label="Graf decyzyjny przypomnień o zapłacie"></svg></section>
-    <aside class="karta boczny" id="boczny" aria-live="polite"></aside>
+    <div class="graj"><button class="btn" id="graj"><svg class="ic"><use href="#i-graj"/></svg>Pokaż od początku</button></div>
   </div>
 
-  <section class="karta sekcja">
+  <div class="tytulDrogi" id="tytulDrogi"></div>
+  <div class="podDrogi" id="podDrogi"></div>
+  <div class="droga" id="droga"></div>
+
+  <section class="sekcja">
     <h2>Co trzeba zatwierdzić?</h2>
-    <div class="pod">Stan po komentarzach w Asanie. Ustalone zostaje, chyba że ktoś zgłosi zmianę. Pozycje z pomarańczowym „?” to moje propozycje, o których decyduje dział sprzedaży.</div>
-    <ul class="dec" id="dec"></ul>
+    <div class="pod">Większość ustaliliśmy w Asanie. Dwie rzeczy to moje propozycje, o których decyduje dział sprzedaży.</div>
+    <div class="dec" id="dec"></div>
   </section>
-  <div class="foot">cyfrowe.pl · projekt „Przypomnienia o zapłacie”. Wiadomości są przykładowe, ostateczne treści przygotowuje marketing. Numer zamówienia 1400123 jest wymyślony.</div>
+  <div class="foot">cyfrowe.pl · projekt „Przypomnienia o zapłacie”. Treści wiadomości są przykładowe, ostateczne przygotowuje marketing. Numer zamówienia 1400123 jest wymyślony.</div>
 </div>
 
 <script>
 (function () {
   var SPOSOBY = {
-    szybka: { n: 'Szybka płatność', termin: 5, tel: false, start: 'BLIK albo karta nie przeszły', w1: '20 minut', w1potw: true },
-    raty: { n: 'Raty', termin: 7, tel: true, start: 'wniosek o raty niedokończony', w1: '30 minut', w1potw: true },
-    przelew: { n: 'Przelew tradycyjny', termin: 7, tel: true, start: 'przelew jeszcze nie wpłynął', w1: '2 dni robocze', w1potw: false },
-    salon: { n: 'Odbiór w salonie', termin: 7, tel: true, start: 'towar czeka w salonie', w1: '2 dni robocze', w1potw: true }
+    szybka: { n: 'Szybka płatność', termin: 5, tel: false, start: 'Płatność BLIK-iem albo kartą nie przeszła.', w1: '20 minut', w1potw: true },
+    raty: { n: 'Raty', termin: 7, tel: true, start: 'Klient wybrał raty, ale nie dokończył wniosku w banku.', w1: '30 minut', w1potw: true },
+    przelew: { n: 'Przelew', termin: 7, tel: true, start: 'Klient ma zapłacić przelewem, ale pieniądze jeszcze nie wpłynęły.', w1: '2 dni robocze', w1potw: false },
+    salon: { n: 'Odbiór w salonie', termin: 7, tel: true, start: 'Towar czeka w salonie, a klient ma zapłacić przy odbiorze.', w1: '2 dni robocze', w1potw: true }
   };
-  var SCEN = [['nic', 'Nie reaguje'], ['po1', 'Płaci po 1. przypomnieniu'], ['tel', 'Odbiera telefon i płaci'], ['nieodb', 'Nie odbiera telefonu'],
-    ['czas', 'Prosi o więcej czasu'], ['rez', 'Rezygnuje']];
-  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic', gra: false, i: -1, anim: null, t: null };
-  var X = 520, L = 150, R = 880, RR = 1130, R3 = 1300;
+  var SCEN = [['nic', 'Nie reaguje'], ['po1', 'Płaci po przypomnieniu'], ['tel', 'Płaci po telefonie'], ['nieodb', 'Nie odbiera'], ['czas', 'Prosi o czas'], ['rez', 'Rezygnuje']];
+  var st = { sposob: 'raty', kwota: 'duza', scen: 'nic', t: [] };
 
-  function N() {
-    var S = SPOSOBY[st.sposob];
-    return {
-      start: { x: X, y: 50, k: 'krok', t1: 'Zamówienie bez zapłaty', t2: S.start, kiedy: 'Start', opis: 'Klient złożył zamówienie, ale ' + S.start + '. Zamówienie blokuje towar, dopóki klient nie zapłaci albo nie minie termin.' },
-      w1: { x: X, y: 160, k: 'czas', t1: 'Czekamy ' + S.w1, t2: 'klient często płaci sam', potw: S.w1potw, kiedy: 'Czekanie', opis: 'Automat daje klientowi chwilę. Wielu klientów kończy płatność bez przypominania.',
-        potwT: st.sposob === 'salon' ? 'Proponuję rytm jak przy przelewie, liczony od chwili, gdy towar czeka w salonie.' : 'Dziś dział przypomina „od razu, gdy dotrze do zamówienia”. Proponuję ' + S.w1 + '.' },
-      gA: { x: X, y: 280, k: 'bramka', t1: 'Zapłacił?', t2: 'automat sprawdza sklep', kiedy: 'Bramka', opis: 'Tuż przed wysyłką automat sprawdza w sklepie, czy wpłata już jest: od bramki płatności, od banku albo z Verto.',
-        wyj: [['Tak', 'koniec, klient nie dostaje żadnej wiadomości'], ['Nie', 'wysyłamy pierwsze przypomnienie']] },
-      okA: { x: L, y: 280, k: 'ok', t1: 'Zapłacone', t2: 'bez wiadomości', kiedy: 'Koniec', opis: 'Klient zapłacił sam. Automat niczego nie wysyła.' },
-      m1: { x: X, y: 400, k: 'wiad', t1: '1. przypomnienie', t2: 'mail i SMS w tej samej chwili', kiedy: 'Wiadomość', mail: 1, opis: 'Klient dostaje mail i SMS. Każda wiadomość ma przycisk „Zapłać” za to samo zamówienie i „Nie chcę, anuluj”.' },
-      g1: { x: X, y: 520, k: 'bramka', t1: 'Co kliknął?', t2: 'w mailu albo SMS-ie', kiedy: 'Bramka', opis: 'Klient może zareagować na wiadomość albo ją zignorować.',
-        wyj: [['Zapłać', 'płaci za to samo zamówienie'], ['Nie chcę', 'zamówienie anuluje się od razu'], ['Nic', 'idziemy dalej']] },
-      okB: { x: L, y: 520, k: 'ok', t1: 'Zapłacone', t2: 'koniec wiadomości', kiedy: 'Koniec', opis: 'Klient zapłacił po pierwszym przypomnieniu. Automat nie wysyła już nic.' },
-      x1: { x: R, y: 520, k: 'kon', t1: 'Anulowane', t2: 'na prośbę klienta', kiedy: 'Koniec', opis: 'Klient kliknął „Nie chcę, anuluj”. Towar wraca do sprzedaży, klient dostaje krótkie potwierdzenie i żadnych przypomnień więcej.' },
-      gB: { x: X, y: 650, k: 'bramka', t1: 'Od 10 000 zł?', t2: 'raty, przelew, salon', kiedy: 'Bramka',
-        opis: 'Telefon dostają zamówienia od 10 000 zł z ratami, przelewem albo zapłatą w salonie. Przy szybkiej płatności nie dzwonimy. Co piąty klient z progu zostaje bez telefonu, żeby zmierzyć, ile telefon ratuje.',
-        wyj: [['Tak', 'zamówienie trafia na poranną listę rozmów'], ['Nie', 'czekamy na drugie przypomnienie']] },
-      tel: { x: R, y: 650, k: 'tel', t1: 'Telefon z listy', t2: 'następny dzień roboczy, od 7:00', kiedy: 'Telefon', skrypt: 1,
-        opis: 'Pracownik widzi w aplikacji, kogo i dlaczego obdzwonić, otwiera kartę klienta w Thulium i dzwoni. Rozmowa zapisuje się w historii klienta.' },
-      gC: { x: R, y: 770, k: 'bramka', t1: 'Odebrał?', t2: '', kiedy: 'Bramka', opis: 'Pracownik zapisuje wynik rozmowy jednym kliknięciem.', wyj: [['Tak', 'rozmowa'], ['Nie', 'pracownik wysyła SMS']] },
-      sms: { x: R, y: 890, k: 'tel', t1: 'SMS od pracownika', t2: 'gotowy tekst z aplikacji', kiedy: 'SMS', smsP: 1, opis: 'Klient nie odebrał. Aplikacja podsuwa gotowy SMS, a przypomnienia automatu idą dalej według planu.' },
-      gW: { x: RR, y: 770, k: 'bramka', t1: 'Wynik rozmowy?', t2: '', kiedy: 'Bramka', opis: 'Pracownik wybiera jeden z wyników: zapłaci dziś, inna płatność, zapłacone przed telefonem, rezygnuje.',
-        wyj: [['Zapłaci', 'albo zmieni sposób zapłaty: automat sprawdzi wpłatę przed kolejną wiadomością'], ['Rezygnuje', 'pracownik anuluje zamówienie']] },
-      x2: { x: RR, y: 890, k: 'kon', t1: 'Anulowane', t2: 'po rozmowie', kiedy: 'Koniec', opis: 'Klient powiedział w rozmowie, że rezygnuje. Pracownik anuluje zamówienie.' },
-      w2: { x: X, y: 1010, k: 'czas', t1: 'Czekamy 2 dni robocze', t2: 'od pierwszego przypomnienia', kiedy: 'Czekanie', opis: 'Tak jak dziś w dziale sprzedaży: drugi kontakt po 2 dniach roboczych.' },
-      gD: { x: X, y: 1130, k: 'bramka', t1: 'Zapłacił?', t2: 'automat sprawdza sklep', kiedy: 'Bramka', opis: 'Znów sprawdzenie tuż przed wysyłką. Kto zapłacił albo ma zaksięgowany przelew, nie dostaje drugiego przypomnienia.',
-        wyj: [['Tak', 'koniec wiadomości'], ['Nie', 'drugie przypomnienie z terminem']] },
-      okD: { x: L, y: 1130, k: 'ok', t1: 'Zapłacone', t2: 'koniec wiadomości', kiedy: 'Koniec', opis: 'Klient zapłacił przed drugim przypomnieniem.' },
-      m2: { x: X, y: 1250, k: 'wiad', t1: '2. przypomnienie', t2: 'z datą anulowania', kiedy: 'Wiadomość', mail: 2, opis: 'Mail i SMS z dokładnym dniem anulowania. Dochodzi trzeci przycisk: „Potrzebuję więcej czasu”.' },
-      g2: { x: X, y: 1370, k: 'bramka', t1: 'Co kliknął?', t2: 'w mailu albo SMS-ie', kiedy: 'Bramka', opis: 'Klient może zapłacić, poprosić o więcej czasu, zrezygnować albo nic nie zrobić.',
-        wyj: [['Zapłać', 'koniec'], ['Więcej czasu', 'termin +7 dni, jeden raz'], ['Nic', 'czekamy do terminu'], ['Nie chcę', 'działa tak samo jak w pierwszym przypomnieniu: anulowanie od razu']] },
-      okE: { x: L, y: 1370, k: 'ok', t1: 'Zapłacone', t2: 'po 2. przypomnieniu', kiedy: 'Koniec', opis: 'Klient zapłacił po drugim przypomnieniu.' },
-      ext: { x: R, y: 1370, k: 'krok', t1: 'Termin +7 dni', t2: 'jeden raz, bez wyjątków', kiedy: 'Przedłużenie', opis: 'Klient kliknął „Potrzebuję więcej czasu”. Termin przesuwa się o 7 dni. Drugi raz przycisk się nie pokaże.' },
-      w3: { x: X, y: 1490, k: 'czas', t1: 'Czekamy do terminu', t2: 'dzień ' + S.termin + ' albo 7 dni później', kiedy: 'Czekanie',
-        opis: 'Termin na zapłatę: ' + S.termin + ' dni' + (st.sposob === 'salon' ? ' od chwili, gdy towar czeka w salonie' : ' od złożenia zamówienia') + '. Po przedłużeniu 7 dni więcej.' },
-      gF: { x: X, y: 1610, k: 'bramka', t1: 'Zapłacił w terminie?', t2: '', kiedy: 'Bramka', opis: 'Ostatnie sprawdzenie w dniu terminu o 9:00.', wyj: [['Tak', 'zamówienie idzie do realizacji'], ['Nie', 'anulowanie']] },
-      okF: { x: L, y: 1610, k: 'ok', t1: 'Zapłacone', t2: 'w ostatniej chwili', kiedy: 'Koniec', opis: 'Klient zapłacił przed terminem.' },
-      anul: { x: X, y: 1730, k: 'kon', t1: 'Anulowanie', t2: 'i wiadomość o nim', kiedy: 'Koniec', mail: 3,
-        opis: 'Termin minął. Sklep anuluje zamówienie i zwalnia towar. Klient dostaje mail i SMS bez wyrzutu, z przyciskiem do odtworzenia zamówienia.',
-        uwaga: 'Dziś mail o anulowaniu nie dochodzi do klienta. To sprawa do naprawy w sklepie przed startem.' }
-    };
-  }
-  var E = [
-    ['start', 'w1'], ['w1', 'gA'], ['gA', 'okA', 'Tak'], ['gA', 'm1', 'Nie'], ['m1', 'g1'],
-    ['g1', 'okB', 'Zapłać'], ['g1', 'x1', 'Nie chcę'], ['g1', 'gB', 'Nic'],
-    ['gB', 'tel', 'Tak'], ['gB', 'w2', 'Nie'], ['tel', 'gC'], ['gC', 'sms', 'Nie'], ['gC', 'gW', 'Tak'],
-    ['sms', 'w2', '', [[R, 1010]]], ['gW', 'x2', 'Rezygnuje'], ['gW', 'w2', 'Zapłaci', [[R3, 770], [R3, 1010]]],
-    ['w2', 'gD'], ['gD', 'okD', 'Tak'], ['gD', 'm2', 'Nie'], ['m2', 'g2'],
-    ['g2', 'okE', 'Zapłać'], ['g2', 'ext', 'Więcej czasu'], ['g2', 'w3', 'Nic'],
-    ['ext', 'w3', '', [[R, 1490]]], ['w3', 'gF'], ['gF', 'okF', 'Tak'], ['gF', 'anul', 'Nie']
-  ];
-  var ROZ = { krok: [250, 66], czas: [250, 66], wiad: [250, 66], tel: [220, 66], ok: [190, 58], kon: [190, 58], bramka: [210, 100] };
-
-  function droga() {
-    var tel = SPOSOBY[st.sposob].tel && st.kwota === 'duza', s = st.scen;
-    var p = ['start', 'w1', 'gA', 'm1', 'g1'];
-    if (s === 'po1') return p.concat(['okB']);
-    if (s === 'rez' && !tel) return p.concat(['x1']);
-    p.push('gB');
-    if (tel) {
-      p.push('tel', 'gC');
-      if (s === 'tel' || s === 'rez') { p.push('gW'); if (s === 'rez') return p.concat(['x2']); return p.concat(['w2', 'gD', 'okD']); }
-      p.push('sms');
-    }
-    p.push('w2', 'gD', 'm2', 'g2');
-    if (s === 'czas') return p.concat(['ext', 'w3', 'gF', 'okF']);
-    return p.concat(['w3', 'gF', 'anul']);
-  }
-  function stanKonca(id) {
-    if (/^ok/.test(id)) return ['opłacone', 'ok'];
-    if (id === 'anul') return ['anulowane po terminie', 'bad'];
-    if (/^x/.test(id)) return ['anulowane na prośbę klienta', 'bad'];
-    return ['czeka na zapłatę', 'nb'];
-  }
-
-  var W, P;
-  /* punkt na krawędzi węzła w stronę (dx, dy) */
-  function brzeg(n, dx, dy) {
-    var r = ROZ[n.k];
-    if (dx) return [n.x + dx * r[0] / 2, n.y];
-    return [n.x, n.y + dy * r[1] / 2];
-  }
-  function krawedz(e) {
-    var a = W[e[0]], b = W[e[1]], m = e[3];
-    if (m) {
-      /* punkty pośrednie: wyjście w stronę pierwszego, wejście od strony ostatniego */
-      var p1 = m[0], pn = m[m.length - 1];
-      var s = p1[0] !== a.x ? brzeg(a, p1[0] > a.x ? 1 : -1, 0) : brzeg(a, 0, p1[1] > a.y ? 1 : -1);
-      var k = pn[1] === b.y ? brzeg(b, pn[0] > b.x ? 1 : -1, 0) : brzeg(b, 0, pn[1] > b.y ? 1 : -1);
-      return [s].concat(m).concat([k]);
-    }
-    if (a.x === b.x) return [brzeg(a, 0, b.y > a.y ? 1 : -1), brzeg(b, 0, b.y > a.y ? -1 : 1)];
-    if (a.y === b.y) { var d = b.x > a.x ? 1 : -1; return [brzeg(a, d, 0), brzeg(b, -d, 0)]; }
-    var d2 = b.x > a.x ? 1 : -1;
-    return [brzeg(a, d2, 0), [b.x, a.y], brzeg(b, 0, -1)];
-  }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function ik(n) { return '<svg class="ic"><use href="#i-' + n + '"/></svg>'; }
-  function txt(x, y, t, kl) { return '<text x="' + x + '" y="' + y + '" text-anchor="middle" class="' + kl + '">' + esc(t) + '</text>'; }
 
-  function rysuj() {
-    W = N(); P = droga();
-    var tel = SPOSOBY[st.sposob].tel && st.kwota === 'duza';
-    var wyl = { tel: !tel, gC: !tel, sms: !tel, gW: !tel, x2: !tel };
-    var h = '<defs><marker id="gr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#B8C2D1"/></marker>' +
-      '<marker id="grA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0B57D0"/></marker></defs>';
-    E.forEach(function (e) {
-      var pts = krawedz(e), d = 'M' + pts.map(function (p) { return p[0] + ' ' + p[1]; }).join(' L');
-      var w = wyl[e[0]] || wyl[e[1]];
-      h += '<g class="kr' + (w ? ' wyl' : '') + '" id="k-' + e[0] + '-' + e[1] + '"><path d="' + d + '" marker-end="url(#gr)"/>';
-      if (e[2]) {
-        var p0 = pts[0], p1 = pts[1], poz = p0[1] === p1[1];
-        var lx = poz ? p0[0] + (p1[0] - p0[0]) * .5 : p0[0], ly = poz ? p0[1] : p0[1] + Math.min(28, (p1[1] - p0[1]) * .45);
-        var szer = e[2].length * 7.6 + 18;
-        h += '<rect class="etb" x="' + (lx - szer / 2) + '" y="' + (ly - 11) + '" width="' + szer + '" height="22" rx="11"/>' + '<text x="' + lx + '" y="' + (ly + 4.5) + '" text-anchor="middle">' + esc(e[2]) + '</text>';
+  /* ------------------------------------------------------------ droga */
+  function droga() {
+    var S = SPOSOBY[st.sposob], tel = S.tel && st.kwota === 'duza', s = st.scen, T = S.termin, D = [];
+    function pyt(o) { D.push(Object.assign({ typ: 'pyt', ik: 'pyt', kiedy: 'Pytanie' }, o)); }
+    D.push({ typ: 'krok', ik: 'koszyk', kiedy: st.sposob === 'salon' ? 'Dzień 0 · towar w salonie' : 'Dzień 0', tyt: 'Zamówienie czeka na zapłatę', opis: S.start + ' Towar jest zarezerwowany dla klienta.' });
+    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy ' + S.w1 + ', bo wielu klientów płaci samo', potw: S.w1potw ? (st.sposob === 'salon' ? 'Propozycja: rytm jak przy przelewie. Decyduje dział sprzedaży.' : 'Propozycja: ' + S.w1 + '. Decyduje dział sprzedaży.') : '' });
+    pyt({ pyt: 'Czy klient już zapłacił?', opis: 'Automat sprawdza to w sklepie tuż przed wysłaniem wiadomości.', opcje: [['Tak', 'koniec, klient nie dostaje żadnej wiadomości', 'ok'], ['Nie', 'wysyłamy pierwsze przypomnienie', 'dalej']], wyb: 1 });
+    D.push({ typ: 'wiad', ik: 'mail', kiedy: 'Wiadomość 1 z 3', tyt: 'Pierwsze przypomnienie', opis: 'Mail i SMS w tej samej chwili. Klient może od razu zapłacić za to samo zamówienie albo z niego zrezygnować.', w: 1 });
+    var o1 = [['Zapłać', 'płaci i dostaje zwykłe potwierdzenie', 'ok'], ['Nie chcę, anuluj', 'zamówienie anuluje się od razu, towar wraca do sprzedaży', 'kon'], ['Nic', 'czekamy dalej', 'dalej']];
+    if (s === 'po1') { pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 0 }); return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Klient zapłacił po pierwszym przypomnieniu. Automat nie wysyła już nic.' }]); }
+    if (s === 'rez' && !tel) { pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 1 }); return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Koniec', tyt: 'Anulowane na prośbę klienta', opis: 'Klient dostaje krótkie potwierdzenie anulowania i żadnych przypomnień więcej.' }]); }
+    pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o1, wyb: 2 });
+    pyt({ pyt: 'Czy zamówienie jest od 10 000 zł?', opis: st.sposob === 'szybka' ? 'Przy szybkiej płatności nie dzwonimy: klient zwykle płaci sam po pierwszym przypomnieniu.' : 'Dotyczy rat, przelewu i odbioru w salonie. Co piąty klient z progu zostaje bez telefonu, żeby zmierzyć, ile telefon ratuje.',
+      opcje: [['Tak', 'dział sprzedaży dzwoni do klienta', 'dalej'], ['Nie', 'czekamy na drugie przypomnienie', 'dalej']], wyb: tel ? 0 : 1 });
+    if (tel) {
+      D.push({ typ: 'tel', ik: 'tel', kiedy: 'Następny dzień roboczy, rano', tyt: 'Telefon z działu sprzedaży', opis: 'Pracownik widzi rano listę osób do obdzwonienia i powód przy każdej z nich. Dzwoni z karty klienta w Thulium, więc rozmowa zapisuje się w historii klienta.',
+        cytat: 'Dzień dobry, dzwonię z cyfrowe.pl w sprawie zamówienia 1400123. Widzę, że zapłata jeszcze nie przyszła. Mogę w czymś pomóc?' });
+      var odb = s === 'tel' || s === 'rez';
+      pyt({ pyt: 'Czy klient odebrał?', opcje: [['Tak', 'rozmowa', 'dalej'], ['Nie', 'pracownik wysyła krótki SMS, a przypomnienia idą dalej', 'dalej']], wyb: odb ? 0 : 1 });
+      if (odb) {
+        pyt({ pyt: 'Co ustalił pracownik?', opcje: [['Zapłaci', 'albo wybierze inny sposób zapłaty', 'ok'], ['Rezygnuje', 'pracownik anuluje zamówienie', 'kon']], wyb: s === 'rez' ? 1 : 0 });
+        if (s === 'rez') return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Koniec', tyt: 'Anulowane po rozmowie', opis: 'Klient powiedział, że rezygnuje. Pracownik anuluje zamówienie i towar wraca do sprzedaży.' }]);
+        D.push({ typ: 'czas', ik: 'zegar', tyt: 'Klient płaci tego samego dnia' });
+        return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Gdy wpłata przyjdzie, automat nie wysyła już drugiego przypomnienia.' }]);
       }
-      h += '</g>';
-    });
-    Object.keys(W).forEach(function (id) {
-      var n = W[id], r = ROZ[n.k], x = n.x - r[0] / 2, y = n.y - r[1] / 2, ksz;
-      if (n.k === 'bramka') ksz = '<polygon points="' + n.x + ',' + y + ' ' + (n.x + r[0] / 2) + ',' + n.y + ' ' + n.x + ',' + (y + r[1]) + ' ' + x + ',' + n.y + '"/>';
-      else ksz = '<rect x="' + x + '" y="' + y + '" width="' + r[0] + '" height="' + r[1] + '" rx="' + (n.k === 'ok' || n.k === 'kon' ? r[1] / 2 : 16) + '"/>';
-      var ty = n.t2 ? n.y - 3 : n.y + 5;
-      h += '<g class="wz k-' + n.k + (wyl[id] ? ' wyl' : '') + '" data-id="' + id + '" tabindex="0" role="button" aria-label="' + esc(n.t1) + '">' + ksz + txt(n.x, ty, n.t1, 't1') + (n.t2 ? txt(n.x, n.y + 15, n.t2, 't2') : '') +
-        (n.potw ? '<circle class="potw" cx="' + (x + r[0] - 4) + '" cy="' + (y + 4) + '" r="11"/><text class="potwT" x="' + (x + r[0] - 4) + '" y="' + (y + 8.5) + '" text-anchor="middle">?</text>' : '') + '</g>';
-    });
-    h += '<circle class="kropka" id="kropka" r="9" cx="-50" cy="-50"/>';
-    document.getElementById('g').innerHTML = h;
-    oznacz(-1); panel(null);
-  }
-  function oznacz(i) {
-    st.i = i;
-    document.querySelectorAll('.wz').forEach(function (g) { g.classList.remove('akt', 'teraz'); });
-    document.querySelectorAll('.kr').forEach(function (g) { g.classList.remove('akt'); g.querySelector('path').setAttribute('marker-end', 'url(#gr)'); });
-    for (var k = 0; k <= i; k++) {
-      var g = document.querySelector('.wz[data-id="' + P[k] + '"]'); if (g) { g.classList.add('akt'); if (k === i) g.classList.add('teraz'); }
-      if (k > 0) { var e = document.getElementById('k-' + P[k - 1] + '-' + P[k]); if (e) { e.classList.add('akt'); e.querySelector('path').setAttribute('marker-end', 'url(#grA)'); } }
+      D.push({ typ: 'tel', ik: 'sms', kiedy: 'Zaraz po próbie', tyt: 'SMS od pracownika', opis: 'Aplikacja podsuwa gotowy tekst, pracownik wysyła go jednym kliknięciem.', sms: 'cyfrowe.pl: probowalismy sie dodzwonic w sprawie zamowienia 1400123. Zaplac lub oddzwon: cyfrowe.pl/zaplac/1400123' });
     }
+    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy 2 dni robocze od pierwszego przypomnienia' });
+    pyt({ pyt: 'Czy klient już zapłacił?', opis: 'Znów sprawdzenie tuż przed wysyłką.', opcje: [['Tak', 'koniec, bez kolejnych wiadomości', 'ok'], ['Nie', 'wysyłamy drugie przypomnienie', 'dalej']], wyb: 1 });
+    D.push({ typ: 'wiad', ik: 'mail', kiedy: 'Wiadomość 2 z 3', tyt: 'Drugie przypomnienie z datą', opis: 'Wiadomość podaje dokładny dzień, po którym zamówienie zostanie anulowane. Klient może poprosić o więcej czasu.', w: 2 });
+    var o2 = [['Zapłać', 'płaci i dostaje potwierdzenie', 'ok'], ['Więcej czasu', 'termin przesuwa się o 7 dni, jeden raz', 'dalej'], ['Nie chcę, anuluj', 'anulowanie od razu', 'kon'], ['Nic', 'czekamy do terminu', 'dalej']];
+    pyt({ pyt: 'Co klient zrobił z wiadomością?', opcje: o2, wyb: s === 'czas' ? 1 : 3 });
+    if (s === 'czas') {
+      D.push({ typ: 'krok', ik: 'kal', kiedy: 'Przedłużenie', tyt: 'Termin przesuwa się o 7 dni', opis: 'Jeden raz, bez telefonu i bez wyjątków. Przycisk „Więcej czasu” drugi raz się nie pokaże.' });
+      D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy do nowego terminu' });
+      pyt({ pyt: 'Czy klient zapłacił przed terminem?', opcje: [['Tak', 'zamówienie idzie do realizacji', 'ok'], ['Nie', 'anulowanie', 'kon']], wyb: 0 });
+      return D.concat([{ typ: 'ok', ik: 'ok', kiedy: 'Koniec', tyt: 'Zapłacone', opis: 'Klient zapłacił w przedłużonym terminie.' }]);
+    }
+    D.push({ typ: 'czas', ik: 'zegar', tyt: 'Czekamy do dnia ' + T + (st.sposob === 'salon' ? ' od chwili, gdy towar czeka w salonie' : '') });
+    pyt({ pyt: 'Czy klient zapłacił przed terminem?', opis: 'Ostatnie sprawdzenie w dniu terminu o 9:00.', opcje: [['Tak', 'zamówienie idzie do realizacji', 'ok'], ['Nie', 'anulowanie', 'kon']], wyb: 1 });
+    return D.concat([{ typ: 'kon', ik: 'x', kiedy: 'Wiadomość 3 z 3 · dzień ' + T + ', 9:00', tyt: 'Anulowanie i spokojna wiadomość', opis: 'Sklep zwalnia towar. Klient dostaje mail i SMS bez wyrzutu, z przyciskiem do odtworzenia zamówienia.', w: 3,
+      uwaga: 'Dziś mail o anulowaniu nie dochodzi do klienta. IT musi to naprawić przed startem.' }]);
   }
+
   function wiadomosc(nr) {
     var S = SPOSOBY[st.sposob], s = st.sposob, mail, sms, przyc;
     if (nr === 1) {
@@ -334,71 +243,60 @@ svg.g { width:100%; height:auto; display:block; }
     } else if (nr === 2) {
       mail = ['Twoje zamówienie czeka do dnia ' + S.termin, 'Po tym dniu zwolnimy towar. Potrzebujesz więcej czasu? Przedłużymy termin o 7 dni.'];
       sms = 'cyfrowe.pl: zamowienie 1400123 czeka na zaplate do dnia ' + S.termin + '. Zaplac: cyfrowe.pl/zaplac/1400123';
-      przyc = ['Zapłać', 'Potrzebuję więcej czasu', 'Nie chcę, anuluj'];
+      przyc = ['Zapłać', 'Więcej czasu', 'Nie chcę, anuluj'];
     } else {
       mail = ['Anulowaliśmy zamówienie. Nic nie płacisz', 'Odtworzysz je jednym kliknięciem. Cena będzie z dnia odtworzenia.'];
       sms = 'cyfrowe.pl: anulowalismy zamowienie 1400123, nic nie placisz. Odtworz: cyfrowe.pl/odtworz/1400123';
       przyc = ['Odtwórz zamówienie'];
     }
-    return '<div class="wiad"><div class="g">' + ik('mail') + 'Mail</div><div class="b"><b>' + esc(mail[0]) + '</b>' + esc(mail[1]) + '<div class="przyc">' +
-      przyc.map(function (p, i) { return '<span class="' + (i ? 'j' : '') + '">' + esc(p) + '</span>'; }).join('') + '</div></div></div>' +
-      '<div class="wiad sms"><div class="g">' + ik('sms') + 'SMS w tej samej chwili</div><div class="b">' + esc(sms) + '</div></div>';
-  }
-  function panel(id) {
-    var b = document.getElementById('boczny'), sc = SCEN.filter(function (x) { return x[0] === st.scen; })[0][1];
-    var dr = '<div class="droga">' + P.map(function (p, k) { return '<span class="' + (k <= st.i ? 'on' : '') + '">' + esc(W[p].t1) + '</span>'; }).join('') + '</div>';
-    var kon = stanKonca(st.i >= 0 ? P[st.i] : '');
-    var wyn = '<div class="wynik">Zamówienie: <span class="chip ' + kon[1] + '">' + kon[0] + '</span></div>';
-    if (!id) {
-      b.innerHTML = '<div class="krok-kiedy">Droga klienta: ' + esc(sc) + '</div><div class="krok-tyt">Kliknij „Odtwórz” albo dowolny element grafu</div>' +
-        '<div class="krok-opis">Animacja przeprowadzi klienta przez kolejne bramki. Poniżej cała droga dla wybranych ustawień.</div>' + dr + wyn;
-      return;
-    }
-    var n = W[id], h = '<div class="krok-kiedy">' + esc(n.kiedy) + '</div><div class="krok-tyt">' + esc(n.t1) + '</div><div class="krok-opis">' + esc(n.opis) + '</div>';
-    if (n.wyj) h += '<ul class="wyjscia">' + n.wyj.map(function (w) { return '<li><b>' + esc(w[0]) + '</b><span>' + esc(w[1]) + '</span></li>'; }).join('') + '</ul>';
-    if (n.mail) h += wiadomosc(n.mail);
-    if (n.skrypt) h += '<div class="wiad"><div class="g">' + ik('tel') + 'Jak zaczyna rozmowę pracownik</div><div class="b">„Dzień dobry, dzwonię z cyfrowe.pl w sprawie zamówienia 1400123. Widzę, że zapłata jeszcze nie przyszła. Mogę w czymś pomóc?”</div></div>';
-    if (n.smsP) h += '<div class="wiad sms"><div class="g">' + ik('sms') + 'SMS od pracownika</div><div class="b">cyfrowe.pl: probowalismy sie dodzwonic w sprawie zamowienia 1400123. Zaplac lub oddzwon: cyfrowe.pl/zaplac/1400123</div></div>';
-    if (n.potw) h += '<div class="uwaga">Propozycja, decyduje dział sprzedaży. ' + esc(n.potwT) + '</div>';
-    if (n.uwaga) h += '<div class="uwaga">' + esc(n.uwaga) + '</div>';
-    if (P.indexOf(id) < 0) h += '<div class="nota">Ten element nie leży na wybranej drodze klienta.</div>';
-    b.innerHTML = h + dr + wyn;
+    return '<div class="tel-ekran"><div class="g">' + ik('mail') + 'Mail</div><b>' + esc(mail[0]) + '</b>' + esc(mail[1]) + '<div class="przyc">' +
+      przyc.map(function (p, i) { return '<span class="' + (i ? 'j' : '') + '">' + esc(p) + '</span>'; }).join('') + '</div></div>' +
+      '<div class="tel-ekran sms"><div class="g">' + ik('sms') + 'SMS w tej samej chwili</div><div class="t">' + esc(sms) + '</div></div>';
   }
 
-  function jedz(i, gotowe) {
-    var kropka = document.getElementById('kropka');
-    if (i <= 0) { kropka.setAttribute('cx', W[P[0]].x); kropka.setAttribute('cy', W[P[0]].y); gotowe(); return; }
-    var e = document.getElementById('k-' + P[i - 1] + '-' + P[i]);
-    if (!e) { gotowe(); return; }
-    var p = e.querySelector('path'), dl = p.getTotalLength(), t0 = null, czas = Math.max(450, dl * 2);
-    function krok(t) {
-      if (!st.gra) return;
-      if (t0 === null) t0 = t;
-      var u = Math.min(1, (t - t0) / czas), q = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2, pt = p.getPointAtLength(dl * q);
-      kropka.setAttribute('cx', pt.x); kropka.setAttribute('cy', pt.y);
-      if (u < 1) st.anim = requestAnimationFrame(krok); else gotowe();
-    }
-    st.anim = requestAnimationFrame(krok);
+  function element(e, i) {
+    var h = '<div class="el ' + e.typ + '" data-i="' + i + '"><div class="kolo">' + ik(e.ik) + '</div><div class="karta">';
+    if (e.typ === 'czas') return h + '<div class="tyt">' + esc(e.tyt) + '</div>' + (e.potw ? '<span class="potw">' + esc(e.potw) + '</span>' : '') + '</div></div>';
+    h += (e.kiedy ? '<div class="kiedy">' + esc(e.kiedy) + '</div>' : '') + '<div class="tyt">' + esc(e.typ === 'pyt' ? e.pyt : e.tyt) + '</div>' + (e.opis ? '<div class="opis">' + esc(e.opis) + '</div>' : '');
+    if (e.typ === 'pyt') h += '<div class="opcje">' + e.opcje.map(function (o, k) {
+      return '<div class="opcja t-' + o[2] + (k === e.wyb ? ' wyb' : '') + '"><span class="odp">' + esc(o[0]) + '</span><span class="sk">' + esc(o[1]) + '</span>' + (k === e.wyb ? '<span class="str">tak było tutaj</span>' : '') + '</div>';
+    }).join('') + '</div>';
+    if (e.cytat) h += '<div class="cytat">„' + esc(e.cytat) + '”</div>';
+    if (e.sms) h += '<div class="wiadomosci otw" style="grid-template-columns:1fr"><div class="tel-ekran sms"><div class="g">' + ik('sms') + 'SMS od pracownika</div><div class="t">' + esc(e.sms) + '</div></div></div>';
+    if (e.w) h += '<button class="pokazWiad" data-w="' + i + '">Zobacz, co dostaje klient</button><div class="wiadomosci" id="w' + i + '">' + wiadomosc(e.w) + '</div>';
+    if (e.uwaga) h += '<div class="uwaga">' + esc(e.uwaga) + '</div>';
+    return h + '</div></div>';
   }
-  function nastepny() {
-    if (!st.gra) return;
-    var i = st.i + 1;
-    if (i >= P.length) { stop(); return; }
-    jedz(i, function () {
-      oznacz(i); panel(P[i]);
-      var g = document.querySelector('.wz[data-id="' + P[i] + '"]');
-      if (g && window.innerWidth < 1200 && g.scrollIntoView) g.scrollIntoView({ block: 'center', behavior: 'smooth' });
-      st.t = setTimeout(nastepny, W[P[i]].k === 'bramka' ? 1500 : 1200);
+
+  function rysuj(animuj) {
+    st.t.forEach(clearTimeout); st.t = [];
+    var D = droga(), S = SPOSOBY[st.sposob], sc = SCEN.filter(function (x) { return x[0] === st.scen; })[0][1];
+    document.getElementById('tytulDrogi').textContent = S.n + ', ' + (st.kwota === 'duza' ? 'od 10 000 zł' : 'do 10 000 zł') + ': ' + sc.toLowerCase();
+    var kon = D[D.length - 1];
+    var ileW = D.filter(function (e) { return e.typ === 'wiad' || e.w; }).length;
+    document.getElementById('podDrogi').textContent = ileW + (ileW === 1 ? ' wiadomość' : ' wiadomości') + ' od automatu, ' +
+      (D.some(function (e) { return e.ik === 'tel'; }) ? 'telefon z działu sprzedaży, ' : 'bez telefonu, ') + 'na końcu: ' + kon.tyt.toLowerCase() + '.';
+    var box = document.getElementById('droga');
+    box.innerHTML = '<div class="postep" id="postep"></div>' + D.map(element).join('');
+    var el = box.querySelectorAll('.el'), post = document.getElementById('postep');
+    function pokaz(k) {
+      el[k].classList.add('pokaz');
+      var r = el[k].getBoundingClientRect(), b = box.getBoundingClientRect();
+      post.style.height = Math.max(0, r.top - b.top + 14) + 'px';
+    }
+    if (!animuj) { for (var k = 0; k < el.length; k++) pokaz(k); return; }
+    el.forEach(function (_, k) {
+      st.t.push(setTimeout(function () {
+        pokaz(k);
+        if (animuj === 'przewin' && el[k].scrollIntoView) el[k].scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }, 120 + k * (animuj === 'przewin' ? 750 : 110)));
     });
   }
-  function start() { if (st.i >= P.length - 1) oznacz(-1); st.gra = true; przycisk(); nastepny(); }
-  function stop() { st.gra = false; clearTimeout(st.t); cancelAnimationFrame(st.anim); przycisk(); }
-  function przycisk() { document.getElementById('graj').innerHTML = ik(st.gra ? 'pauza' : 'graj') + '<span>' + (st.gra ? 'Zatrzymaj' : 'Odtwórz') + '</span>'; }
 
   function seg(id, opcje, k) {
     document.getElementById(id).innerHTML = opcje.map(function (o) {
       var wyl = k === 'scen' && (o[0] === 'tel' || o[0] === 'nieodb') && !(SPOSOBY[st.sposob].tel && st.kwota === 'duza');
-      return '<button class="' + (st[k] === o[0] ? 'on' : '') + '" data-k="' + k + '" data-v="' + o[0] + '"' + (wyl ? ' disabled title="Telefon jest tylko od 10 000 zł, przy ratach, przelewie i odbiorze w salonie"' : '') + '>' + o[1] + '</button>';
+      return '<button class="' + (st[k] === o[0] ? 'on' : '') + '" data-k="' + k + '" data-v="' + o[0] + '"' + (wyl ? ' disabled title="Dzwonimy tylko od 10 000 zł, przy ratach, przelewie i odbiorze w salonie"' : '') + '>' + o[1] + '</button>';
     }).join('');
   }
   function ster() {
@@ -406,33 +304,30 @@ svg.g { width:100%; height:auto; display:block; }
     seg('sKwota', [['mala', 'do 10 000 zł'], ['duza', 'od 10 000 zł']], 'kwota');
     seg('sScen', SCEN, 'scen');
   }
-  function wybierzWezel(id) { stop(); var i = P.indexOf(id); if (i >= 0) oznacz(i); panel(id); }
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest('button');
-    if (b && b.dataset.k) {
-      stop(); st[b.dataset.k] = b.dataset.v;
+    var b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.k) {
+      st[b.dataset.k] = b.dataset.v;
       if ((st.scen === 'tel' || st.scen === 'nieodb') && !(SPOSOBY[st.sposob].tel && st.kwota === 'duza')) st.scen = 'nic';
-      ster(); rysuj(); return;
+      ster(); rysuj('szybko'); return;
     }
-    if (b && b.id === 'graj') { st.gra ? stop() : start(); return; }
-    if (b && b.id === 'odNowa') { stop(); oznacz(-1); document.getElementById('kropka').setAttribute('cx', -50); panel(null); return; }
-    var w = ev.target.closest('.wz'); if (w) wybierzWezel(w.dataset.id);
+    if (b.id === 'graj') { document.getElementById('tytulDrogi').scrollIntoView({ behavior: 'smooth' }); rysuj('przewin'); return; }
+    if (b.dataset.w != null) { var w = document.getElementById('w' + b.dataset.w); w.classList.toggle('otw'); b.textContent = w.classList.contains('otw') ? 'Schowaj wiadomość' : 'Zobacz, co dostaje klient'; }
   });
-  document.addEventListener('keydown', function (ev) { var w = ev.target.closest && ev.target.closest('.wz'); if (w && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); wybierzWezel(w.dataset.id); } });
 
   var DEC = [
-    ['Liczba wiadomości', '2 przypomnienia i wiadomość o anulowaniu, za każdym razem mail i SMS razem, przy każdej kwocie.', 'ustalone 3.11', 'ok'],
-    ['Termin na zapłatę', '5 dni przy szybkiej płatności, 7 dni przy ratach, przelewie i odbiorze w salonie.', 'ustalone 3.11', 'ok'],
-    ['Rytm przy przelewie', 'Pierwsze przypomnienie po 2 dniach roboczych, drugie po kolejnych 2.', 'ustalone 3.11', 'ok'],
-    ['Telefon', 'Od 10 000 zł przy ratach, przelewie i salonie, z porannej listy. Co piąty klient bez telefonu do pomiaru.', 'ustalone 27.10', 'ok'],
+    ['Liczba wiadomości', '2 przypomnienia i wiadomość o anulowaniu, zawsze mail i SMS razem.', 'ustalone 3.11', 'ok'],
+    ['Termin na zapłatę', '5 dni przy szybkiej płatności, 7 dni przy pozostałych.', 'ustalone 3.11', 'ok'],
+    ['Telefon', 'Od 10 000 zł przy ratach, przelewie i salonie. Co piąty klient bez telefonu do pomiaru.', 'ustalone 27.10', 'ok'],
     ['Więcej czasu', 'Jeden raz, przyciskiem w drugim przypomnieniu, zawsze o 7 dni.', 'ustalone 26.10', 'ok'],
-    ['Pierwsze przypomnienie przy szybkiej płatności i ratach', 'Propozycja: 20 minut po nieudanej płatności, 30 minut po zamówieniu na raty.', 'decyduje dział sprzedaży', 'warn'],
-    ['Rytm przy odbiorze w salonie', 'Propozycja: jak przy przelewie, od chwili, gdy towar czeka w salonie.', 'decyduje dział sprzedaży', 'warn'],
-    ['Mail o anulowaniu', 'Dziś nie dochodzi do klienta.', 'do naprawy: IT', 'bad'],
-    ['Trzecie przypomnienie', 'Po 8 tygodniach połowa zamówień dostaje 2 przypomnienia, połowa 3.', 'test po 8 tygodniach', 'nb']
+    ['Pierwsze przypomnienie', 'Proponuję 20 minut po nieudanej szybkiej płatności i 30 minut po zamówieniu na raty.', 'decyduje dział sprzedaży', 'warn'],
+    ['Odbiór w salonie', 'Proponuję rytm jak przy przelewie, liczony od chwili, gdy towar czeka w salonie.', 'decyduje dział sprzedaży', 'warn'],
+    ['Mail o anulowaniu', 'Dziś nie dochodzi do klienta. Bez naprawy klient nie dowie się o anulowaniu.', 'do naprawy: IT', 'bad'],
+    ['Trzecie przypomnienie', 'Po 8 tygodniach połowa zamówień dostaje 2 przypomnienia, połowa 3. Zostaje to, co lepiej działa.', 'test po 8 tygodniach', 'nb'],
+    ['Rytm przy przelewie', 'Pierwsze przypomnienie po 2 dniach roboczych, drugie po kolejnych 2, jak dziś.', 'ustalone 3.11', 'ok']
   ];
-  document.getElementById('dec').innerHTML = DEC.map(function (d) { return '<li><span class="co">' + esc(d[0]) + '</span><span>' + esc(d[1]) + '</span><span><span class="chip ' + d[3] + '">' + esc(d[2]) + '</span></span></li>'; }).join('');
-  ster(); rysuj();
+  document.getElementById('dec').innerHTML = DEC.map(function (d) { return '<div class="dc"><span class="co">' + esc(d[0]) + '</span><span class="ja">' + esc(d[1]) + '</span><span class="chip ' + d[3] + '">' + esc(d[2]) + '</span></div>'; }).join('');
+  ster(); rysuj('szybko');
 })();
 </script>
 </body>
